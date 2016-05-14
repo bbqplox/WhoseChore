@@ -17,6 +17,7 @@ Bundler.require(*Rails.groups)
 module Myapp
   class Application < Rails::Application
     Rails.application.config.assets.precompile += %w( welcome.scss )
+    Rails.application.config.assets.precompile += %w( users.scss )
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
