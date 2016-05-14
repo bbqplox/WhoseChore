@@ -11,7 +11,10 @@
 <div id="crouton">
 <% if current_user %> 
   <ul> 
-    <li><%= current_user.email %></li> 
+    <li>
+    <p>Logged in as: </p>
+    <%= current_user.email %>
+    </li> 
     <li><%= link_to "Log out", logout_path, method: "delete" %></li> 
   </ul> 
 <% else %> 
