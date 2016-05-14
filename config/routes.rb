@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :chores
     root 'welcome#index'
 
     get 'signup' => 'users#new'
