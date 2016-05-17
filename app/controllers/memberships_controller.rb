@@ -9,7 +9,7 @@ class MembershipsController < ApplicationController
   #end
 ​
   private
-    def group_params
+    def membership_params
       params.require(:membership).permit(:group, :user)
     end
 
