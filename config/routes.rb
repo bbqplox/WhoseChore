@@ -2,16 +2,20 @@ Rails.application.routes.draw do
     resources :chores
     root 'welcome#index'
 
-    get 'signup' => 'users#new'
+    get '/signup' => 'users#new'
     resources :users
     resources :groups
 
-    get 'login' => 'sessions#new'
-    post 'login' => 'sessions#create'
-    delete 'logout' => 'sessions#destroy'
+    get '/login' => 'sessions#new'
+    post '/login' => 'sessions#create'
+    delete '/logout' => 'sessions#destroy'
 
     get '/groups' => 'groups#index'
     get '/chores' => 'chores#index'
+
+    resources :profiles, only: [:edit, :show]
+    get '/profile' => 'profile#show'
+    get '/edit_profile/' => 'profile#edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
