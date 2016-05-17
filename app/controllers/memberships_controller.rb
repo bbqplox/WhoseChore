@@ -1,12 +1,12 @@
 class MembershipsController < ApplicationController
 ​
-  def revoke
+  #def revoke
     #@membership.destroy
     #respond_to do |format|
       #format.html { redirect_to groups_url, notice: 'Membership was revoked.' }
       #format.json { head :no_content }
     #end
-  end
+  #end
 ​
   private
     def group_params
