@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:index, :show]
 
   # GET /groups
   # GET /groups.json
@@ -25,7 +26,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-    #@group.users << current_user
+    @group.users << current_user
 
     respond_to do |format|
       if @group.save
@@ -60,6 +61,22 @@ class GroupsController < ApplicationController
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def addmember
+    @user = User.find(params[:email])
+    @groups.users << @user
+
+    respond_to do |format|
+      if @group.save
+        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.json { render :show, status: :created, location: @group }
+      else
+        format.html { render :new }
+        format.json { render json: @group.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   private

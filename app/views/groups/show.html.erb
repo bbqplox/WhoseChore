@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
-
 <%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<%= link_to 'Back', groups_path %> |
+<tbody>
+  <%  %>
+  <% @group.users.each do |user| %>
+  <%= @membership = Membership.where(:user_id => params[:user_id]).where(:group_id => params[:group_id]).first %>
+    <tr>
+      <td><%= user.first_name + " " + user.last_name %></td>
+      <td><%= link_to 'Show', user %></td>
+      <td><%= link_to 'Kick', @membership, method: :revoke, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</tbody>
