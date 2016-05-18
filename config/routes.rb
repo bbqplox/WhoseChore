@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     get '/edit_profile/' => 'profile#edit'
 
     resources :rewardpunishments
+    get '/chores' => 'chores#index'
+    get '/rewards' => 'rewardpunishment#index'
+    get '/punishments' => 'rewardpunishment#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

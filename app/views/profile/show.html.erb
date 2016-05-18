@@ -23,12 +23,14 @@
 			<h2 class="name"><%= current_user.first_name + current_user.last_name %></h2>
 			<h3 class="location"><%= current_user.email %></h3>
 			<ul class="contact_information">
-				<li class="work">CEO</li>
-				<li class="website"><a class="nostyle" href="#">www.apple.com</a></li>
-				<li class="mail">john.doe@apple.com</li>
+				<li class="work">Student</li>
+				<li class="website"><a class="nostyle" href="#">4th year</a></li>
+				<li class="mail">Computer Science</li>
 				<li class="phone">1-(732)-757-2923</li>
-				<li class="resume"><a href="#" class="nostyle">download resume</a></li>
 			</ul>
+			<%= link_to "Chores", chores_path %>
+			<%= link_to "Rewards", rewardpunishments_path %>
+			<%= link_to "Punishments", rewardpunishments_path %>
 		</div>
 		</div>
 	</body>
