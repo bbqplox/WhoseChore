@@ -1,0 +1,18 @@
+<%= form_for @rewardpunishment do |f| %>
+  <%= f.label "Title:" %><br>
+  <%= f.text_field :title %><br>
+  <br>
+  <%= f.label "Type:" %><br>
+  <%= f.label "Reward" %>
+  <%= f.radio_button :rorp, "0" %><br>
+  <%= f.label "Punishment" %>
+  <%= f.radio_button :rorp, "1" %><br>
+  <br>
+  <%= f.label "Values:" %><br>
+  <%= f.text_field :value %><br>
+  <br>
+  <%= f.label "Description:" %><br>
+  <%= f.text_area :description %><br>
+  <br>
+  <%= f.submit "Submit"%><br>
+<% end %>
