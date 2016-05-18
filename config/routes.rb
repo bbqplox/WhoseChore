@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get '/groups' => 'groups#index'
     get '/chores' => 'chores#index'
 
-    resources :profiles, only: [:edit, :show]
+    resources :profile, only: [:edit, :show]
     get '/profile' => 'profile#show'
     get '/edit_profile/' => 'profile#edit'
 
