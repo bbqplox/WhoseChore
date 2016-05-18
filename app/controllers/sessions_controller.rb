@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
     		session[:user_id] = @user.id
     		redirect_to '/profile'
   		else
-    		redirect_to 'login'
- 		 end 
+    		redirect_to '/login'
+ 		 end
 	end
 
 	def destroy
