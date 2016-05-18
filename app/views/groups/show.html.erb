@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
+
+<%= form_tag group_path(@group, :group => :group), :method => 'patch' do %>
+  <p>
+    <!---%= params[:group] => :group %-->
+    <%= text_field_tag :search, params[:search], placeholder: "enter email" %>
+    <%= submit_tag "Add User", :name => nil %>
+  </p>
+<% end %>
+
+
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %> |
 <tbody>

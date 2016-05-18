@@ -42,6 +42,16 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
+    if params[:search].present?
+      @user = User.search(params[:search]).first
+      if @user != nil
+        @group.users << @user
+        {notice: "Successfully added member"}
+      else
+        {notice: "Failed to add member"}
+      end
+    end
+
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
@@ -61,22 +71,6 @@ class GroupsController < ApplicationController
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def addmember
-    @user = User.find(params[:email])
-    @groups.users << @user
-
-    respond_to do |format|
-      if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
-        format.json { render :show, status: :created, location: @group }
-      else
-        format.html { render :new }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
-    end
-
   end
 
   private
