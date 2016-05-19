@@ -15,5 +15,10 @@
   <%= @chore.Date %>
 </p>
 
+<p>
+  <strong>Group:</strong>
+  <td><%= Group.find(chore.group_id).name %></td>
+</p>
+
 <%= link_to 'Edit', edit_chore_path(@chore) %> |
 <%= link_to 'Back', chores_path %>

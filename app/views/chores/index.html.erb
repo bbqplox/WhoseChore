@@ -15,11 +15,16 @@
 
   <tbody>
     <% current_user.chores.each do |chore| %>
+        <% if Group.exists?(chore.group_id) %>
+          <% @name = Group.find(chore.group_id).name %>
+        <% else %>
+          <% @name = 'None' %>
+        <% end %>
       <tr>
         <td><%= chore.Name %></td>
         <td><%= chore.Description %></td>
         <td><%= chore.Date %></td>
-        <td><%= Group.find(chore.group_id).name %></td>
+        <td><%= @name %></td>
         <td><%= link_to 'Show', chore %></td>
         <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
         <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
