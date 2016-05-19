@@ -42,15 +42,6 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
-    if params[:search].present?
-      @user = User.search(params[:search]).first
-      if @user != nil
-        @group.users << @user
-        {notice: "Successfully added member"}
-      else
-        {notice: "Failed to add member"}
-      end
-    end
 
     respond_to do |format|
       if @group.update(group_params)

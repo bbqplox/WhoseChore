@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<%= form_tag group_path(@group, :group => :group), :method => 'patch' do %>
+<%= form_tag memberships_url, :method => 'post' do %>
   <p>
-    <!---%= params[:group] => :group %-->
+    <%= hidden_field_tag :group, @group.id %>
     <%= text_field_tag :search, params[:search], placeholder: "enter email" %>
     <%= submit_tag "Add User", :name => nil %>
   </p>
@@ -11,14 +11,22 @@
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %> |
-<tbody>
-  <%  %>
-  <% @group.users.each do |user| %>
-  <%= @membership = Membership.where(:user_id => params[:user_id]).where(:group_id => params[:group_id]).first %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group.users.each do |user| %>
+    <% @membership = Membership.where(:user_id => params[:user_id]).where(:group_id => params[:group_id]).first %>
     <tr>
       <td><%= user.first_name + " " + user.last_name %></td>
       <td><%= link_to 'Show', user %></td>
       <!--<td><%= link_to 'Kick', @membership, method: :revoke, data: { confirm: 'Are you sure?' } %></td>-->
     </tr>
-  <% end %>
-</tbody>
+    <% end %>
+  </tbody>
+</table>
