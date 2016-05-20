@@ -12,6 +12,9 @@
 
   <tbody>
     <% @current_user.groups.each do |group| %>
+      <!-- Do not display for inactive memberships -->
+      <% @membership = Membership.search(current_user.id, group.id).first %>
+      <% next if @membership.active == false %>
       <tr>
         <td><%= group.name %></td>
         <td><%= link_to 'Show', group %></td>

@@ -1,34 +1,68 @@
 class MembershipsController < ApplicationController
-#defrevoke
-#@membership.destroy
-#respond_to do |format|
-#format.html{redirect_to groups_url,notice:'Membership was revoked.'}
-#format.json{head:no_content}
-#end
-#end
 
   def create
-
-    @user = User.search(params[:search]).first
+    """
+    Forms mapping between user and group. Reactivates membership if already exists.
+    """
+    @user = User.search_by_email(params[:search]).first
     @group = Group.find(params[:group])
-    if @user != nil and Membership.search(@user.id, @group.id).first == nil
 
-      @membership = Membership.new(group_id: @group.id, user_id: @user.id)
-
-      respond_to do |format|
-        if @membership.save
-          format.html { redirect_to @group, notice: 'Member successfully added.' }
-          format.json { render :show, status: :created, location: @group }
-        else
-          format.html { render :new }
-          format.json { render json: @group.errors, status: :unprocessable_entity }
-        end
-      end
-
+    if @user != nil
+      @membership = Membership.search(@user.id, @group.id).first
     else
-      redirect_to @group, notice: 'Failed to add member.'
+      @membership = nil
     end
 
+    @notice = nil
+    # user must exist and does not belong in the group
+    if @user != nil and  @membership == nil
+
+      @membership = Membership.new(group_id: @group.id, user_id: @user.id)
+      @notice = 'Member was successfully added.'
+
+    # membership for the user already exists
+    elsif @membership != nil
+
+      @membership.active = true
+      @notice = 'Membership activated.'
+
+    # failed
+    else
+      #redirect_to @group, notice: 'Failed to add member.'
+      @notice = 'Failed to add member.'
+    end
+
+    if @membership != nil
+      @membership.save
+    end
+
+    redirect_to @group, notice: @notice
+
+  end
+
+
+  def deactivate
+    """
+    Deactivate membership between user and group.
+    """
+    @user = User.search_by_id(params[:user]).first
+    @group = Group.find(params[:group])
+    @membership = Membership.search(@user.id, @group.id).first
+    # membership must already exist
+    if @membership != nil
+      @membership.active = false
+      @notice = 'Member successfuly banished.'
+    # failed
+    else
+      @notice = 'Failed to banish member.'
+    end
+
+    if @membership != nil
+      @membership.save
+    end
+
+    redirect_to @group, notice: @notice
+    
   end
 
   private

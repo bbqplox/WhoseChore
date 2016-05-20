@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<%= form_tag memberships_url, :method => 'post' do %>
+<%= form_tag memberships_url(:group => @group.id), method: :post do %>
   <p>
-    <%= hidden_field_tag :group, @group.id %>
+    <!--%= hidden_field_tag :group, @group.id %-->
     <%= text_field_tag :search, params[:search], placeholder: "enter email" %>
     <%= submit_tag "Add User", :name => nil %>
   </p>
@@ -21,12 +21,13 @@
 
   <tbody>
     <% @group.users.each do |user| %>
-    <% @membership = Membership.where(:user_id => params[:user_id]).where(:group_id => params[:group_id]).first %>
-    <tr>
-      <td><%= user.first_name + " " + user.last_name %></td>
-      <td><%= link_to 'Show', user %></td>
-      <!--<td><%= link_to 'Kick', @membership, method: :revoke, data: { confirm: 'Are you sure?' } %></td>-->
-    </tr>
+      <% @membership = Membership.search(user.id, @group.id).first %>
+      <% next if @membership.active == false %>
+      <tr>
+        <td><%= user.first_name + " " + user.last_name %></td>
+        <td><%= link_to 'View Profile', user %></td>
+        <td><%= link_to 'Banish', memberships_url(:user => user.id, :group => @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>

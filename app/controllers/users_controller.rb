@@ -13,6 +13,10 @@ class UsersController < ApplicationController
 			end
 	end
 
+	def show
+		redirect_to @user.profile
+	end
+
 	def index
   	@users = User.search(params[:search])
 	end

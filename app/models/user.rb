@@ -14,4 +14,12 @@ class User < ActiveRecord::Base
   	end
 	end
 
+	def self.search_by_email(email)
+		where(["email = ?", "#{email}"])
+	end
+
+	def self.search_by_id(user_id)
+		where(["id = ?", "#{user_id}"])
+	end
+
 end

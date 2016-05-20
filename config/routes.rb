@@ -6,10 +6,14 @@ Rails.application.routes.draw do
     get '/signup' => 'users#new'
     resources :users
     resources :groups
+    resources :memberships
 
     get '/login' => 'sessions#new'
     post '/login' => 'sessions#create'
     delete '/logout' => 'sessions#destroy'
+    # ghetto logout
+    get '/logout' => 'sessions#destroy'
+
 
     get '/groups' => 'groups#index'
     get '/chores' => 'chores#index'
@@ -24,6 +28,7 @@ Rails.application.routes.draw do
     get '/punishments' => 'rewardpunishment#index'
 
     post '/memberships' => 'memberships#create'
+    delete '/memberships' => 'memberships#deactivate'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
