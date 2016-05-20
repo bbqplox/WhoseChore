@@ -14,7 +14,9 @@
 				<div class="follow_count">Household</div>
         <!-- Shows a list of the groups that the user is in -->
         <% @user.groups.each do |group| %>
-            <%= link_to group.name, group %>
+          <% @membership = Membership.search(@user.id, group.id).first %>
+          <% next if @membership.active == false %>
+          <%= link_to group.name, group %>
         <% end %>
 			</div>
 			<div class="following">
