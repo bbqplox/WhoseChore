@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
     get '/groups' => 'groups#index'
     get '/chores' => 'chores#index'
+    get 'chores/:id/completion' => 'chores#completion', :as => 'chore_complete'
 
     resources :profile, only: [:edit, :show]
     get '/profile' => 'profile#show'

@@ -2,17 +2,17 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @chore.Name %>
+  <%= @chore.name %>
 </p>
 
 <p>
   <strong>Description:</strong>
-  <%= @chore.Description %>
+  <%= @chore.description %>
 </p>
 
 <p>
   <strong>Date:</strong>
-  <%= @chore.Date %>
+  <%= @chore.date %>
 </p>
 
 <% if Group.exists?(@chore.group_id) %>

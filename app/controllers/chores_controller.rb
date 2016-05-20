@@ -63,6 +63,12 @@ class ChoresController < ApplicationController
     end
   end
 
+  def completion
+    @chore = Chore.find(params[:id])
+    @chore.update_attribute(:complete, true)
+    redirect_to chores_url, notice: 'Chore completed!.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chore
@@ -71,6 +77,6 @@ class ChoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chore_params
-      params.require(:chore).permit(:name, :description, :date, :group_id)
+      params.require(:chore).permit(:name, :description, :date, :group_id, :complete)
     end
 end
