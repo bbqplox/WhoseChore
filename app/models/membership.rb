@@ -7,7 +7,13 @@ class Membership < ActiveRecord::Base
 	end
 
   def self.is_active(user_id, group_id)
-    return Membership.search(user_id, group_id).first.active
+    Membership.search(user_id, group_id).first.active
+  end
+
+  def self.give_user_admin(user_id, group_id)
+    @membership = search(user_id, group_id).first
+    @membership.admin = true
+    @membership.save
   end
 
 end

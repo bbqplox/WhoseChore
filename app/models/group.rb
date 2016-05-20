@@ -4,5 +4,4 @@ class Group < ActiveRecord::Base
   has_many :administrators
   has_many :chores
 
-
 end

@@ -10,12 +10,17 @@ Rails.application.routes.draw do
 
     get '/login' => 'sessions#new'
     post '/login' => 'sessions#create'
-    delete '/logout' => 'sessions#destroy'
+
     # ghetto logout
+    delete '/logout' => 'sessions#destroy'
     get '/logout' => 'sessions#destroy'
 
 
     get '/groups' => 'groups#index'
+
+    get '/groups/:id/remove_member' => 'groups#remove_member', :as => 'remove_group_member'
+    put '/groups/:id/add_member' => 'groups#add_member', :as => 'add_group_member'
+
     get '/chores' => 'chores#index'
     get 'chores/:id/completion' => 'chores#completion', :as => 'chore_complete'
 
@@ -27,9 +32,6 @@ Rails.application.routes.draw do
     get '/chores' => 'chores#index'
     get '/rewards' => 'rewardpunishment#index'
     get '/punishments' => 'rewardpunishment#index'
-
-    post '/memberships' => 'memberships#create'
-    delete '/memberships' => 'memberships#deactivate'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
