@@ -31,11 +31,6 @@
     <%= f.select :group_id, options_from_collection_for_select(current_user.groups, 'id', 'name', f.object.group_id)%>
   </div>
 
-  <div class="field">
-    <%= f.label "Complete" %>
-    <%= f.check_box :complete %>
-  </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>

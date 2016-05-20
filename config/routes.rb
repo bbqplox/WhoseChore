@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     get 'chores/:id/completion' => 'chores#completion', :as => 'chore_complete'
 
     resources :profile, only: [:edit, :show]
-    get '/profile' => 'profile#show'
+    get '/profile/' => 'profile#show'
     get '/edit_profile/' => 'profile#edit'
 
     resources :rewardpunishments

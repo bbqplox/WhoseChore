@@ -30,7 +30,7 @@ class ChoresController < ApplicationController
 
     respond_to do |format|
       if @chore.save
-        format.html { redirect_to @chore, notice: 'Chore was successfully created.' }
+        format.html { redirect_to chores_url, notice: 'Chore was successfully created.' }
         format.json { render :show, status: :created, location: @chore }
       else
         format.html { render :new }
@@ -77,6 +77,6 @@ class ChoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chore_params
-      params.require(:chore).permit(:name, :description, :date, :group_id, :complete)
+      params.require(:chore).permit(:user_id, :name, :description, :date, :group_id, :complete)
     end
 end

@@ -26,5 +26,27 @@
   <td><%= @name %></td>
 </p>
 
+<% if User.exists?(@chore.user_id) %>
+  <% @name = User.find(@chore.user_id).first_name %>
+<% else %>
+  <% @name = 'None' %>
+<% end %>
+
+<p>
+  <strong>Person Responsible:</strong>
+  <td><%=@name %></td>
+</p>
+
+<% if @chore.complete == true %>
+  <% @name = "yes" %>
+<% else %>
+  <% @name = "no" %>
+<% end %>
+
+<p>
+  <strong>Complete?:</strong>
+  <td><%=@name %></td>
+</p>
+
 <%= link_to 'Edit', edit_chore_path(@chore) %> |
 <%= link_to 'Back', chores_path %>
