@@ -37,3 +37,4 @@ class Membership < ActiveRecord::Base
       membership.destroy
   end
 end
+end
