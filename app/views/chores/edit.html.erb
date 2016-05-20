@@ -33,8 +33,8 @@
   <div class="field">
     <% if @admin == true %>
       <%= f.label "Person Responsible" %> <br>
-      <%@group = Group.find(@chore.group_id)%>
-      <%= f.select :user_id, options_from_collection_for_select(@group.users, 'id', 'first_name', f.object.user_id)%>
+      <%#@group = Group.find(@chore.group_id)%>
+      <%= f.select :user_id, options_from_collection_for_select(User.active_group_users(@chore.group_id), 'id', 'first_name', f.object.user_id)%>
     <% end %>
   </div>
 

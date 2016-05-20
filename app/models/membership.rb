@@ -24,6 +24,10 @@ class Membership < ActiveRecord::Base
     where(["user_id = ?", "#{user_id}"])
   end
 
+  def self.active_group_memberships(group_id)
+    where(["group_id = ?", "#{group_id}"])
+  end
+
   def self.disband_group(group_id)
     """
     Remove all membership rows pertaining to the specified group.
@@ -31,7 +35,5 @@ class Membership < ActiveRecord::Base
     @memberships = where(["group_id = ? ", "#{group_id}"])
     @memberships.each do |membership|
       membership.destroy
-    end
   end
-
 end
