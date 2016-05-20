@@ -1,1 +1,1 @@
-json.extract! @chore, :id, :Name, :Description, :Date, :created_at, :updated_at
+json.extract! @chore, :id, :name, :description, :date, :created_at, :updated_at
