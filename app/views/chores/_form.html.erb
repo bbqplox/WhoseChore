@@ -23,11 +23,11 @@
 
   <div class="field">
     <%= f.label :Date %><br>
-    <%= f.text_field :Date %>
+    <%= f.select :Date, Date.today.. 2.week.from_now %>
   </div>
 
   <div class="field">
-    <%= f.label "Group" %>
+    <%= f.label "Group" %><br>
     <%= f.select :group_id, options_from_collection_for_select(current_user.groups, 'id', 'name', f.object.group_id)%>
   </div>
 

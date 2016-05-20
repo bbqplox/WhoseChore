@@ -14,7 +14,7 @@
   </thead>
 
   <tbody>
-    <% current_user.chores.each do |chore| %>
+    <% current_user.chores.sort {|a,b| a.Date <=> b.Date }.each do |chore| %>
         <% if Group.exists?(chore.group_id) %>
           <% @name = Group.find(chore.group_id).name %>
         <% else %>
