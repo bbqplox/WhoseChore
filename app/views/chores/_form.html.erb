@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= f.label "Group" %><br>
-    <%= f.select :group_id, options_from_collection_for_select(current_user.groups, 'id', 'name', f.object.group_id)%>
+    <%= f.select :group_id, options_from_collection_for_select(Group.active_user_groups(current_user.id), 'id', 'name', f.object.group_id)%>
   </div>
 
   <div class="actions">

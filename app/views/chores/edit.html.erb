@@ -28,10 +28,14 @@
     <%= f.select :date, Date.today.. 2.week.from_now %>
   </div>
 
+  <% @admin = Membership.search(current_user.id, @chore.group_id).first.admin %>
+
   <div class="field">
-    <%= f.label "Person Responsible" %> <br>
-    <%@group = Group.find(@chore.group_id)%>
-    <%= f.select :user_id, options_from_collection_for_select(@group.users, 'id', 'first_name', f.object.user_id)%>
+    <% if @admin == true %>
+      <%= f.label "Person Responsible" %> <br>
+      <%@group = Group.find(@chore.group_id)%>
+      <%= f.select :user_id, options_from_collection_for_select(@group.users, 'id', 'first_name', f.object.user_id)%>
+    <% end %>
   </div>
 
   <div class="field">

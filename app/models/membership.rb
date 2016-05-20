@@ -16,4 +16,12 @@ class Membership < ActiveRecord::Base
     @membership.save
   end
 
+  def self.is_admin(user_id, group_id)
+    Membership.search(user_id, group_id).first.admin
+  end
+
+  def self.active_user_memberships(user_id)
+    where(["user_id = ?", "#{user_id}"])
+  end
+
 end
