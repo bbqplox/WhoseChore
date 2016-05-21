@@ -23,4 +23,14 @@ class User < ActiveRecord::Base
 		where(["id = ?", "#{user_id}"])
 	end
 
+	def self.active_group_users(group_id)
+		@memberships = Membership.active_group_memberships(group_id)
+		@users = []
+		@memberships.each do |membership|
+			@user = User.find(membership.user_id)
+			@users << @user
+		end
+		@users
+	end
+
 end

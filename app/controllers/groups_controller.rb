@@ -128,6 +128,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
+    Membership.disband_group(@group.id)
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
