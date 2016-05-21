@@ -28,7 +28,11 @@
     <%= f.select :date, Date.today.. 2.week.from_now %>
   </div>
 
-  <% @admin = Membership.search(current_user.id, @chore.group_id).first.admin %>
+  <% if Group.exists?(@chore.group_id)%>
+    <% @admin = Membership.search(current_user.id, @chore.group_id).first.admin %>
+  <% else %>
+    <% @admin = false %>
+  <% end %>
 
   <div class="field">
     <% if @admin == true %>

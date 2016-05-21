@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<%= form_tag add_group_member_path(:id => @group.id), method: :put do %>
+<%= form_tag new_group_invite_path(:group_id => @group.id, :sender_id => current_user.id), method: :post do %>
   <p>
     <!--%= hidden_field_tag :group, @group.id %-->
-    <%= text_field_tag :search, params[:search], placeholder: "enter email" %>
-    <%= submit_tag "Add User", :name => nil %>
+    <%= text_field_tag :search, params[:search], placeholder: "Enter Email" %>
+    <%= submit_tag "Invite User", :name => nil %>
   </p>
 <% end %>
 
