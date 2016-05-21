@@ -1,7 +1,11 @@
 class WelcomeController < ApplicationController
 	skip_before_filter  :verify_authenticity_token
-	
-	def index 
+
+	def index
+		# If a user is already logged in just redirect to their profile
+		if current_user
+			redirect_to '/profile'
+		end
 	end
 
 	def new
@@ -21,4 +25,9 @@ class WelcomeController < ApplicationController
 		session[:user_id] = nil
 		redirect_to '/'
 	end
+
+	def exisiting
+		redirect_to show_profile_path
+	end
+
 end

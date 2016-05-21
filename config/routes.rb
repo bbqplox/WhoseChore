@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
     get '/signup' => 'users#_new'
     resources :users
+    resources :newsfeeds
     resources :groups
     resources :memberships
     resources :group_invites
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
     # ghetto logout
     delete '/logout' => 'sessions#destroy'
     get '/logout' => 'sessions#destroy'
+
+    get '/newsfeed/:id' => 'newsfeed#show'
 
 
     get '/groups' => 'groups#index'
