@@ -9,7 +9,7 @@
 
     <h1>Sign up</h1>
 
-    <%= form_for(@user) do |f| %>
+    <%= form_for User.new do |f| %>
       <%= f.text_field :first_name, :placeholder => "First name" %>
       <%= f.text_field :last_name, :placeholder => "Last name" %>
       <%= f.email_field :email, :placeholder => "Email" %>

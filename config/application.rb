@@ -19,6 +19,7 @@ module Myapp
     Rails.application.config.assets.precompile += %w( welcome.scss )
     Rails.application.config.assets.precompile += %w( users.scss )
     Rails.application.config.assets.precompile += %w( profile.scss )
+    Rails.application.config.assets.precompile += %w( chores.scss )
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

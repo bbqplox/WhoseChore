@@ -1,109 +1,60 @@
 <%= stylesheet_link_tag 'welcome' %>
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <header id="navbar">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Chores App</a>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Whose Chore</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body class="login">
+<!-- header starts here -->
+<div id="facebook-Bar">
+  <div id="facebook-Frame">
+    <div id="logo"> <a href="#">Whose Chore</a> </div>
+    <div id="header-main-right">
+      <div id="header-main-right-nav">
+        <form method="post" action="" id="login_form" name="login_form">
+          <table border="0" style="border:none">
+            <tr>
+            <div id=loginnav>
+            <%= form_for(:session, url: login_path) do |f| %> 
+                <%= f.email_field :email, :placeholder => "Email" %> 
+                <%= f.password_field :password, :placeholder => "Password" %> 
+                <%= f.submit "Log in", class: "btn-submit" %>
+            <% end %>
             </div>
-            </header>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <%= link_to "Sign up", signup_path %>
-                    </li>
-                    <li>
-                        <%= link_to "Login", login_path %>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Full Page Image Background Carousel Header -->
-    <header id="myCarousel" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for Slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <!-- Set the first background image using inline CSS below. -->
-                <div class="fill"><%= image_tag("homepage.jpg", :size => "1280x700") %></div>
-                <div class="carousel-caption">
-                    <h2>Whose Chore is it Anyway?</h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style='/images/homepage.jpg'></div>
-                <div class="carousel-caption">
-                    <h2>Caption 2</h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 3</h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
-
-    </header>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Whose Chore 2016</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
-
+            </tr>
+            <tr>
+              <td><label>
+                  <span style="color:#ccc;">email</span></label></td>
+              <td><label><a href="" style="color:#ccc; text-decoration:none">password</a></label></td>
+            </tr>
+          </table>
+        </form>
+      </div>
     </div>
-    <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
+  </div>
+</div>
+<!-- header ends here -->
+<div class="loginbox radius" style="float: right">
+  <h2 style="color:#141823; text-align:center;">Welcome to Whose Chore</h2>
+  <div class="loginboxinner radius">
+    <div class="loginheader">
+      <h4 class="title">Keep your house clean.</h4>
+    </div>
+    <!--loginheader-->
+    <div class="loginform">
+        <%= render "users/new" %>
+          <button class="radius title" name="signup">Sign Up for Whose Chore</button>
+        </p>
+      </form>
+    </div>
+    <!--loginform-->
+  </div>
+  <!--loginboxinner-->
+</div>
+<!--loginbox-->
+</body>
+</html>

@@ -3,13 +3,16 @@ Rails.application.routes.draw do
     resources :chores
     root 'welcome#index'
 
-    get '/signup' => 'users#new'
+    get '/signup' => 'users#_new'
     resources :users
     resources :groups
     resources :memberships
 
-    get '/login' => 'sessions#new'
+    get '/login' => 'sessions#_new'
     post '/login' => 'sessions#create'
+
+    get '/' => 'welcome#new'
+    post '/' => 'welcome#create'
 
     # ghetto logout
     delete '/logout' => 'sessions#destroy'
