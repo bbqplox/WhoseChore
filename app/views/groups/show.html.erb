@@ -80,7 +80,7 @@
                               <% next if @membership.active == false %>
                               <tr>
                                 <td><%= user.first_name + " " + user.last_name %></td>
-                                <td><%= link_to 'View Profile', user %></td>
+                                <td><%= link_to 'View Profile', user_url(user.id) %></td>
                                 <td><%#= link_to 'Banish', memberships_url(:user => user.id, :group => @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                                 <td><%= link_to 'Banish', remove_group_member_path(@group, :user_id => user.id, :group_id => @group.id), data: { confirm: 'Are you sure?' } %></td>
                               </tr>
