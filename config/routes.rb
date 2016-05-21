@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :users
     resources :groups
     resources :memberships
+    resources :group_invites
 
     get '/login' => 'sessions#new'
     post '/login' => 'sessions#create'
@@ -20,6 +21,10 @@ Rails.application.routes.draw do
 
     get '/groups/:id/remove_member' => 'groups#remove_member', :as => 'remove_group_member'
     put '/groups/:id/add_member' => 'groups#add_member', :as => 'add_group_member'
+
+    # For group invites
+    post '/group_invites/:id' => 'group_invites#create'
+
 
     get '/chores' => 'chores#index'
     get 'chores/:id/completion' => 'chores#completion', :as => 'chore_complete'

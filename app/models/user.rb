@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 	has_many :memberships
 	has_many :groups, :through => :memberships
 	has_many :chores
+	has_many :group_invites
 
 	def self.search(search)
   	if search
