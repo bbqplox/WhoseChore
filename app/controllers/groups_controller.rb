@@ -1,31 +1,23 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy, :require_admin, :add_member, :remove_member]
   before_action :require_user, only: [:index, :show]
-  before_action :require_admin, only: [:destroy, :add_member, :remove_member]
+  before_action :require_admin, only: [:destroy, :remove_member]
 
-
-  # GET /groups
-  # GET /groups.json
   def index
     @groups = Group.all
   end
 
-  # GET /groups/1
-  # GET /groups/1.json
   def show
+    @users_search = User.search(params[:search])
   end
 
-  # GET /groups/new
   def new
     @group = Group.new
   end
 
-  # GET /groups/1/edit
   def edit
   end
 
-  # POST /groups
-  # POST /groups.json
   def create
     @group = Group.new(group_params)
     # TODO: need to give admin
@@ -43,8 +35,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /groups/1
-  # PATCH/PUT /groups/1.json
   def update
 
     respond_to do |format|
@@ -63,10 +53,10 @@ class GroupsController < ApplicationController
     """
     Forms mapping between user and group. Reactivates membership if already exists.
     """
-    @user = User.search_by_email(params[:search]).first
+    @user = User.find(params[:user_id])
 
     if @user != nil
-      @membership = Membership.search(@user.id, @group.id).first
+      @membership = Membership.search(params[:user_id], @group.id).first
     else
       @membership = nil
     end
@@ -76,17 +66,18 @@ class GroupsController < ApplicationController
     if @user != nil and  @membership == nil
 
       @membership = Membership.new(group_id: @group.id, user_id: @user.id)
-      @notice = 'Member was successfully added.'
+      @notice = 'Welcome to the group!'
 
     # membership for the user already exists
     elsif @membership != nil
 
       @membership.active = true
-      @notice = 'Membership activated.'
+      @notice = 'Welcome back!'
 
     # failed
     else
       @notice = 'Failed to add member.'
+      redirect_to group_invites_path, notice: @notice
     end
 
     if @membership != nil

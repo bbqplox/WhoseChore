@@ -1,18 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-<%= form_tag new_group_invite_path(:group_id => @group.id, :sender_id => current_user.id), method: :post do %>
 
 <h1> <%= @group.name %></h1>
 
-<%= form_tag add_group_member_path(:id => @group.id), method: :put do %>
+<!-- form_tag add_group_member_path(:id => @group.id), method: :put do -->
 
+
+<!-- SEARCH FOR USERS TO INVITE -->
+<%= form_tag @group, :method => 'get' do %>
   <p>
-    <!--%= hidden_field_tag :group, @group.id %-->
-    <%= text_field_tag :search, params[:search], placeholder: "Enter Email" %>
-    <%= submit_tag "Invite User", :name => nil %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+    <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
 
+<!-- TABLE FOR USER SEARCH RESULTS -->
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users_search.each do |user| %>
+    <tr>
+      <td><%= user.first_name + " " + user.last_name %></td>
+      <td><%= link_to 'Invite',
+      invite_member_path(invite: {
+        user_id: user.id,
+        group_id: @group.id,
+        sender_id: current_user.id}), method: :post %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %> |
@@ -74,34 +96,33 @@
 <%= link_to 'New Chore', new_chore_path(:group_id => @group.id) %> <br> <br>
 
 <p>Completed</p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Person Responsible</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Person Responsible</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
   <tbody>
-<% @group.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
-  <% next if chore.complete == false %>
-  <% if User.exists?(chore.user_id) %>
-    <% @name = User.find(chore.user_id).first_name %>
-  <% else %>
-    <% @name = 'None' %>
-  <% end %>
-  <tr>
-    <td><%= chore.name %></td>
-    <td><%= chore.date %></td>
-    <td><%= @name %></td>
-    <td><%= link_to 'Show', chore %></td>
-    <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
-    <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
+  <% @group.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+    <% next if chore.complete == false %>
+    <% if User.exists?(chore.user_id) %>
+      <% @name = User.find(chore.user_id).first_name %>
+    <% else %>
+      <% @name = 'None' %>
+    <% end %>
+    <tr>
+      <td><%= chore.name %></td>
+      <td><%= chore.date %></td>
+      <td><%= @name %></td>
+      <td><%= link_to 'Show', chore %></td>
+      <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
+      <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 <br>
-<% end %>

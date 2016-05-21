@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     put '/groups/:id/add_member/' => 'groups#add_member', :as => 'add_group_member'
 
     # For group invites
-    post '/group_invites/:id' => 'group_invites#create'
+    post '/groups/:id/invite/' => 'group_invites#create', :as => 'invite_member'
 
 
     get '/chores' => 'chores#index'

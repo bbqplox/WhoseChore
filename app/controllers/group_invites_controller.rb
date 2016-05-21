@@ -6,15 +6,12 @@ class GroupInvitesController < ApplicationController
   end
 
   def create
-
-    @user = User.search_by_email(params[:search]).first
-
     # TO never DO
-    @group_invite = GroupInvite.new(user_id: @user.id, group_id: params[:group_id], sender_id: params[:sender_id] )
+    @group_invite = GroupInvite.new(group_invite_params)
 
     respond_to do |format|
       if @group_invite.save
-        format.html { redirect_to group_url(params[:group_id]), notice: 'Invite Sent.' }
+        format.html { redirect_to group_url(params[:invite][:group_id]), notice: 'Invite Sent.' }
         format.json { render :show, status: :created, location: @group_invite }
       else
         format.html { render :new }
@@ -37,5 +34,9 @@ class GroupInvitesController < ApplicationController
     def set_group_invite
       @group_invite = GroupInvite.find(params[:id])
     end
+
+    def group_invite_params
+  		params.require(:invite).permit(:user_id, :sender_id, :group_id)
+  	end
 
 end

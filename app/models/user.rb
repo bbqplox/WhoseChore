@@ -7,12 +7,20 @@ class User < ActiveRecord::Base
 	has_many :chores
 	has_many :group_invites
 
-	def self.search(search)
+	def self.search_index(search)
   	if search
 			where(["email LIKE ?", "%#{search}%"])
   	else
     	find_each
   	end
+	end
+
+	def self.search(search)
+		if search
+			where(["email LIKE ?", "%#{search}%"])
+		else
+			return []
+		end
 	end
 
 	def self.search_by_email(email)

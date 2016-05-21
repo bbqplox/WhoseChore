@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 	end
 
 	def index
-  	@users = User.search(params[:search])
+  	@users = User.search_index(params[:search])
 	end
 
 	private
