@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <%= form_tag new_group_invite_path(:group_id => @group.id, :sender_id => current_user.id), method: :post do %>
+
+<h1> <%= @group.name %></h1>
+
+<%= form_tag add_group_member_path(:id => @group.id), method: :put do %>
+
   <p>
     <!--%= hidden_field_tag :group, @group.id %-->
     <%= text_field_tag :search, params[:search], placeholder: "Enter Email" %>
@@ -31,4 +36,71 @@
       </tr>
     <% end %>
   </tbody>
+</table> <br> <br>
+
+<p>Listing Chores</p>
+
+<p>To do</p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Person Responsible</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+      <% next if chore.complete == true %>
+      <% if User.exists?(chore.user_id) %>
+        <% @name = User.find(chore.user_id).first_name %>
+      <% else %>
+        <% @name = 'None' %>
+      <% end %>
+      <tr>
+        <td><%= chore.name %></td>
+        <td><%= chore.date %></td>
+        <td><%= @name %></td>
+        <td><%= link_to 'Show', chore %></td>
+        <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
+        <td><%= link_to 'Complete', chore_complete_path(chore) %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> <br>
+
+<%= link_to 'New Chore', new_chore_path(:group_id => @group.id) %> <br> <br>
+
+<p>Completed</p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Person Responsible</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @group.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+  <% next if chore.complete == false %>
+  <% if User.exists?(chore.user_id) %>
+    <% @name = User.find(chore.user_id).first_name %>
+  <% else %>
+    <% @name = 'None' %>
+  <% end %>
+  <tr>
+    <td><%= chore.name %></td>
+    <td><%= chore.date %></td>
+    <td><%= @name %></td>
+    <td><%= link_to 'Show', chore %></td>
+    <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
+    <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</tbody>
 </table>
+<br>
