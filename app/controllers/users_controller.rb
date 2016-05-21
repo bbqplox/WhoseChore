@@ -8,18 +8,19 @@ class UsersController < ApplicationController
 	    @user = User.new(user_params)
 	    if @user.save
 	      session[:user_id] = @user.id
-	      redirect_to '/profile'
+	      redirect_to '/main'
 	    else
 	      redirect_to '/signup'
-			end
+		end
 	end
 
 	def show
+		@user = current_user
 		redirect_to @user.profile
 	end
 
 	def index
-  	@users = User.search_index(params[:search])
+  		@users = User.search_index(params[:search])
 	end
 
 	private

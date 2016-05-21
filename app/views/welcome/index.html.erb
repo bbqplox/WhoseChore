@@ -1,5 +1,3 @@
-
-
 <%= stylesheet_link_tag 'welcome' %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -17,31 +15,20 @@
     <div id="logo"> <a href="#">Whose Chore</a> </div>
     <div id="header-main-right">
       <div id="header-main-right-nav">
-        <form method="post" action="" id="login_form" name="login_form">
-          <table border="0" style="border:none">
-            <tr>
-            <div id=loginnav>
-            <%= form_for(:session, url: login_path) do |f| %>
-                <%= f.email_field :email, :placeholder => "Email" %>
-                <%= f.password_field :password, :placeholder => "Password" %>
+            <div class="loginnav">
+            <%= form_for(:session, url: login_path) do |f| %> 
+                <%= f.email_field :email, :placeholder => "Email" %> 
+                <%= f.password_field :password, :placeholder => "Password" %> 
                 <%= f.submit "Log in", class: "btn-submit" %>
             <% end %>
             </div>
-            </tr>
-            <tr>
-              <td><label>
-                  <span style="color:#ccc;">email</span></label></td>
-              <td><label><a href="" style="color:#ccc; text-decoration:none">password</a></label></td>
-            </tr>
-          </table>
-        </form>
       </div>
     </div>
   </div>
 </div>
 <!-- header ends here -->
 <div class="loginbox radius" style="float: right">
-  <h2 style="color:#141823; text-align:center;">Welcome to Whose Chore</h2>
+  <h1 style="color:#141823; text-align:center;">Signing up is free and easy</h1>
   <div class="loginboxinner radius">
     <div class="loginheader">
       <h4 class="title">Keep your house clean.</h4>
@@ -49,14 +36,22 @@
     <!--loginheader-->
     <div class="loginform">
         <%= render "users/new" %>
-          <button class="radius title" name="signup">Sign Up for Whose Chore</button>
-        </p>
-      </form>
     </div>
     <!--loginform-->
   </div>
   <!--loginboxinner-->
 </div>
+<!-- ABOUT WHOSE CHORE --> 
+<div class="loginbox radius" style="float: left">
+  <h1 style="color:#141823; text-align:center;">Whose Chore</h1>
+  <div class="loginboxinner radius">
+    <div class="loginheader">
+      <h4 class="title">Where the chores get done and the points don't matter!</h4>
+    </div>
+  </div>
+</div>
+<!-- END ABOUT -->
+    
 <!--loginbox-->
 </body>
 </html>

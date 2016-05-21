@@ -1,0 +1,93 @@
+<%= stylesheet_link_tag 'chores' %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Chores</h1>
+
+
+<p>To do</p>
+
+<div class="container">
+  <div class="row">
+    <input type="text" class="col-xs-8 col-sm-9">
+    <div class="input-buttons col-xs-4 col-sm-3">
+      <a href="#" class="clear-text"><i class="fa fa-trash-o fa-2x"></i></a>
+      <a href="#" class="add-todo"><i class="fa fa-plus fa-2x"></i></a>
+    </div> <!-- div.input-buttons-->
+  </div> <!-- div.row -->
+  <div class="row">
+    <div class="error">
+      <a href="#"><i class="fa fa-times"></i></a>
+      <p>We both know you should be doing something right now. Please enter a task.</p>
+    </div> <!-- div.error -->
+    <!-- Start to-do list -->
+    <ul class="todo-list col-xs-12">
+    </ul>
+  </div> <!-- div.row -->
+</div> <!-- div.container -->
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% current_user.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+      <% next if chore.complete == true %>
+        <% if Group.exists?(chore.group_id) %>
+          <% @name = Group.find(chore.group_id).name %>
+        <% else %>
+          <% @name = 'None' %>
+        <% end %>
+      <tr>
+        <td><%= chore.name %></td>
+        <td><%= chore.date %></td>
+        <td><%= @name %></td>
+        <td><%= link_to 'Show', chore %></td>
+        <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
+        <td><%= link_to 'Complete', chore_complete_path(chore) %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> <br>
+
+<%= link_to 'New Chore', new_chore_path %> <br> <br>
+
+<p>Completed</p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% current_user.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+  <% next if chore.complete == false %>
+    <% if Group.exists?(chore.group_id) %>
+      <% @name = Group.find(chore.group_id).name %>
+    <% else %>
+      <% @name = 'None' %>
+    <% end %>
+  <tr>
+    <td><%= chore.name %></td>
+    <td><%= chore.date %></td>
+    <td><%= @name %></td>
+    <td><%= link_to 'Show', chore %></td>
+    <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
+    <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<br>

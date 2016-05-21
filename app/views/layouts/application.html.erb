@@ -9,23 +9,39 @@
 <body>
 
 <div id="crouton">
-<% if current_user %>
-  <ul>
-    <li>
-    <p>Logged in as: </p>
-    <%= current_user.email %>
-    </li>
-    <!--Don't know why this works-->  
-    <li><%= link_to "Profile", profile_path(current_user), method: "get" %></li>
-    <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-  </ul>
-<% else %>
-  <ul>
-  	<li><%= link_to "Home", '/' %></a></li>
-    <li><%= link_to "Login", '/login' %></a></li>
-    <li><%= link_to "Signup", '/signup' %></a></li>
-  </ul>
-<% end %>
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <h3>
+                        Hello, <%= current_user.first_name %>
+                    </h3>
+                    </li>
+                    <li>
+                        <%= link_to "Main", hub_path(current_user.hub.id) %>
+                    </li>
+                    <li>
+                        <%= link_to "Chores", chores_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Groups", groups_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Rewards/Punishments", rewardpunishments_path %>
+                    </li>
+                    <li>
+                        <%= link_to "Profile", profile_path(current_user.profile.id) %>
+                    </li>
+                    <li>
+                        <%= link_to "Log out", logout_path, method: "delete" %>
+                    </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                </div>
+            </div>
+      </div>
 </div>
 
 

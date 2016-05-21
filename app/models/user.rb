@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	has_one :profile
+	has_one :hub
 	before_create :build_profile #creates profile at user registration
+	before_create :build_hub
 	has_secure_password
 	has_many :memberships
 	has_many :groups, :through => :memberships

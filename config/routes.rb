@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     get '/profile/' => 'profile#show'
     get '/edit_profile/' => 'profile#edit'
 
+    resources :hub, only: [:show]
+    get '/main' => 'hub#show'
+
     resources :rewardpunishments
     get '/chores' => 'chores#index'
     get '/rewards' => 'rewardpunishment#index'
