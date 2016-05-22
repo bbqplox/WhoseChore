@@ -30,7 +30,7 @@ class ChoresController < ApplicationController
 
     respond_to do |format|
       if @chore.save
-        format.html { redirect_to chores_url, notice: 'Chore was successfully created.' }
+        format.html { redirect_to edit_chore_path(@chore.id), notice: 'Chore was successfully created.' }
         format.json { render :show, status: :created, location: @chore }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class ChoresController < ApplicationController
   def update
     respond_to do |format|
       if @chore.update(chore_params)
-        format.html { redirect_to @chore, notice: 'Chore was successfully updated.' }
+        format.html { redirect_to edit_chore_path, notice: 'Chore was successfully updated.' }
         format.json { render :show, status: :ok, location: @chore }
       else
         format.html { render :edit }
@@ -63,6 +63,14 @@ class ChoresController < ApplicationController
     end
   end
 
+  def destroy_all_completed
+    Chore.destroy_all_completed(params[:user_id])
+    respond_to do |format|
+      format.html { redirect_to chores_url, notice: 'Chore was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   def completion
     @chore = Chore.find(params[:id])
     @membership = Membership.search(@chore.user_id, @chore.group_id).first
@@ -71,7 +79,10 @@ class ChoresController < ApplicationController
     @membership.update_attribute(:chore_score, @membership.chore_score + @chore.score)
 
     @membership.save
-    redirect_to chores_url, notice: 'Chore completed!.'
+    respond_to do |format|
+      format.html { redirect_to params[:from], notice: 'Chore completed' }
+      format.json { head :no_content }
+    end
   end
 
   private

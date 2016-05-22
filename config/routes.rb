@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
     get '/chores' => 'chores#index'
     get 'chores/:id/completion' => 'chores#completion', :as => 'chore_complete'
+    post 'chores/destroy_all_completed' => 'chores#destroy_all_completed', :as => 'destroy_all_completed'
 
     resources :profile, only: [:edit, :show]
     get '/profile/' => 'profile#show'

@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160522012307) do
     t.integer  "user_id"
     t.integer  "group_id"
     t.boolean  "complete",    default: false
-    t.integer  "score"
+    t.integer  "score",       default: 0
   end
 
   create_table "group_invites", force: :cascade do |t|

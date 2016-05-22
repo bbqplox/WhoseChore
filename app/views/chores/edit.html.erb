@@ -36,10 +36,65 @@
                     <div class="col-lg-12">
 
                         <h1>Editing Chore</h1>
-                        <%= render 'form' %>
+                        <%= form_for(@chore) do |f| %>
+  <% if @chore.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@chore.errors.count, "error") %> prohibited this chore from being saved:</h2>
 
-                        <%= link_to 'Show', @chore %> |
-                        <%= link_to 'Back', chores_path %>
+      <ul>
+      <% @chore.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :score %><br>
+    <%= f.select :score, 1.. 10 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.select :date, Date.today.. 2.week.from_now %>
+  </div>
+
+  <% if Group.exists?(@chore.group_id)%>
+    <% @admin = Membership.search(current_user.id, @chore.group_id).first.admin %>
+  <% else %>
+    <% @admin = false %>
+  <% end %>
+
+  <div class="field">
+    <% if @admin == true %>
+      <%= f.label "Person Responsible" %> <br>
+      <%#@group = Group.find(@chore.group_id)%>
+      <%= f.select :user_id, options_from_collection_for_select(User.active_group_users(@chore.group_id), 'id', 'first_name', f.object.user_id)%>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Complete" %>
+    <%= f.check_box :complete %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+                        <%= link_to 'Back to Groups', group_path(@chore.group_id) %>
+                        <%= link_to 'Back to Chores', chores_url %>
 
                     </div>
                 </div>
