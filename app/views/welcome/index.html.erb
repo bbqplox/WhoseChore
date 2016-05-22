@@ -16,9 +16,9 @@
     <div id="header-main-right">
       <div id="header-main-right-nav">
             <div class="loginnav">
-            <%= form_for(:session, url: login_path) do |f| %> 
-                <%= f.email_field :email, :placeholder => "Email" %> 
-                <%= f.password_field :password, :placeholder => "Password" %> 
+            <%= form_for(:session, url: login_path) do |f| %>
+                <%= f.email_field :email, :placeholder => "Email" %>
+                <%= f.password_field :password, :placeholder => "Password" %>
                 <%= f.submit "Log in", class: "btn-submit" %>
             <% end %>
             </div>
@@ -32,6 +32,7 @@
   <div class="loginboxinner radius">
     <div class="loginheader">
       <h4 class="title">Keep your house clean.</h4>
+      <h5 id="notice"><%= notice %></h5>
     </div>
     <!--loginheader-->
     <div class="loginform">
@@ -41,7 +42,7 @@
   </div>
   <!--loginboxinner-->
 </div>
-<!-- ABOUT WHOSE CHORE --> 
+<!-- ABOUT WHOSE CHORE -->
 <div class="loginbox radius" style="float: left">
   <h1 style="color:#141823; text-align:center;">Whose Chore</h1>
   <div class="loginboxinner radius">
@@ -51,7 +52,7 @@
   </div>
 </div>
 <!-- END ABOUT -->
-    
+
 <!--loginbox-->
 </body>
 </html>

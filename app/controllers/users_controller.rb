@@ -6,14 +6,19 @@ class UsersController < ApplicationController
 	end
 
 	def create
-	    @user = User.new(user_params)
-	    if @user.save
-	      session[:user_id] = @user.id
-				UserMailer.welcome_email(@user).deliver_later
-	      redirect_to '/profile'
-	    else
-	      redirect_to '/signup'
-		end
+			if User.search_by_email(params[:user][:email]).first == nil
+	    	@user = User.new(user_params)
+	    	if @user.save
+	      	session[:user_id] = @user.id
+					UserMailer.welcome_email(@user).deliver_later
+	      	redirect_to '/profile'
+	    	else
+	      	redirect_to '/'
+				end
+			else
+					redirect_to '/', notice: 'email is taken'
+			end
+
 	end
 
 	def show
