@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     resources :memberships
     resources :group_invites
 
-    get '/login' => 'sessions#_new'
-    post '/login' => 'sessions#create'
+    #get '/login' => 'sessions#_new'
+    #post '/login' => 'sessions#create'
 
     get '/' => 'welcome#new'
     post '/' => 'welcome#create'

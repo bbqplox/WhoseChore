@@ -19,7 +19,7 @@ class WelcomeController < ApplicationController
     		session[:user_id] = @user.id
     		redirect_to '/main'
   		else
-    		redirect_to '/login'
+    		redirect_to '/'
  		 end
 	end
 

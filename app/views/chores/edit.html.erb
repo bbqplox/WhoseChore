@@ -35,8 +35,10 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <h1>Editing Chore</h1>
-                        <%= form_for(@chore) do |f| %>
+<p id="notice"><%= notice %></p>
+
+<h1>Editing Chore</h1>
+<%= form_for(@chore) do |f| %>
   <% if @chore.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@chore.errors.count, "error") %> prohibited this chore from being saved:</h2>

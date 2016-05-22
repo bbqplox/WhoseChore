@@ -16,7 +16,7 @@
     <div id="header-main-right">
       <div id="header-main-right-nav">
             <div class="loginnav">
-            <%= form_for(:session, url: login_path) do |f| %>
+            <%= form_for(:session, url: '/') do |f| %>
                 <%= f.email_field :email, :placeholder => "Email" %>
                 <%= f.password_field :password, :placeholder => "Password" %>
                 <%= f.submit "Log in", class: "btn-submit" %>
