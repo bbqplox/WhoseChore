@@ -22,13 +22,38 @@
   </div>
 
   <div class="field">
+    <%= f.label :score %><br>
+    <%= f.select :score, 1.. 10 %>
+  </div>
+
+  <div class="field">
     <%= f.label :date %><br>
     <%= f.select :date, Date.today.. 2.week.from_now %>
+  </div>
+
+  <% if Group.exists?(@chore.group_id)%>
+    <% @admin = Membership.search(current_user.id, @chore.group_id).first.admin %>
+  <% else %>
+    <% @admin = false %>
+  <% end %>
+
+  <div class="field">
+    <% if @admin == true %>
+      <%= f.label "Person Responsible" %> <br>
+      <%#@group = Group.find(@chore.group_id)%>
+      <%= f.select :user_id, options_from_collection_for_select(User.active_group_users(@chore.group_id), 'id', 'first_name', f.object.user_id)%>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label "Group" %><br>
     <%= f.select :group_id, options_from_collection_for_select(Group.active_user_groups(current_user.id), 'id', 'name', f.object.group_id)%>
+  </div>
+
+
+  <div class="field">
+    <%= f.label "Complete" %>
+    <%= f.check_box :complete %>
   </div>
 
   <div class="actions">

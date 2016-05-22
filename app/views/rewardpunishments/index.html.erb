@@ -1,8 +1,0 @@
-<%= link_to "New Reward or Punishment", new_rewardpunishment_path %>
-
-<% @rewardpunishments.each do |rewardpunishment| %>
-  <h2><%= rewardpunishment.title %></h2>
-  <div> <%= bool_to_glyph(rewardpunishment.rorp) %> </div>
-  <br>
-  <%= link_to "View", rewardpunishment %>
-<%end%>

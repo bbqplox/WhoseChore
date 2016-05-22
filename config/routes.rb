@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :rewards
     resources :chores
     root 'welcome#index'
 
@@ -41,8 +42,7 @@ Rails.application.routes.draw do
     resources :hub, only: [:show]
     get '/main' => 'hub#show'
 
-    resources :rewardpunishments
-    get '/chores' => 'chores#index'
+      get '/chores' => 'chores#index'
     get '/rewards' => 'rewardpunishment#index'
     get '/punishments' => 'rewardpunishment#index'
 

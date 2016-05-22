@@ -65,7 +65,12 @@ class ChoresController < ApplicationController
 
   def completion
     @chore = Chore.find(params[:id])
+    @membership = Membership.search(@chore.user_id, @chore.group_id).first
+
     @chore.update_attribute(:complete, true)
+    @membership.update_attribute(:chore_score, @membership.chore_score + @chore.score)
+
+    @membership.save
     redirect_to chores_url, notice: 'Chore completed!.'
   end
 
@@ -77,6 +82,6 @@ class ChoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chore_params
-      params.require(:chore).permit(:user_id, :name, :description, :date, :group_id, :complete)
+      params.require(:chore).permit(:user_id, :name, :description, :date, :group_id, :complete, :score)
     end
 end

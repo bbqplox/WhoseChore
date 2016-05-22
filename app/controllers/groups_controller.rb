@@ -25,7 +25,11 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        Membership.give_user_admin(current_user.id, @group.id)
+        #Membership.give_user_admin(current_user.id, @group.id)
+        @membership = Membership.search(current_user.id, @group.id).first
+        @membership.chore_score = 0
+        @membership.admin = true
+        @membership.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
@@ -65,7 +69,7 @@ class GroupsController < ApplicationController
     # user must exist and does not belong in the group
     if @user != nil and  @membership == nil
 
-      @membership = Membership.new(group_id: @group.id, user_id: @user.id)
+      @membership = Membership.new(group_id: @group.id, user_id: @user.id, chore_score:0)
       @notice = 'Welcome to the group!'
 
     # membership for the user already exists
