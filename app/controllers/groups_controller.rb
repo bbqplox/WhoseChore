@@ -75,6 +75,7 @@ class GroupsController < ApplicationController
     if @user != nil and  @membership == nil
 
       @membership = Membership.new(group_id: @group.id, user_id: @user.id, chore_score:0)
+      @membership.active = true
       @notice = 'Welcome to the group!'
 
     # membership for the user already exists
