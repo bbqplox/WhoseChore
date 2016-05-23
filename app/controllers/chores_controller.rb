@@ -12,8 +12,8 @@ class ChoresController < ApplicationController
   def new
     if params[:group_id]
       @group = Group.find(params[:group_id])
+      @users = @group.users
     end
-    @users = @group.users
     @chore = Chore.new
   end
 
@@ -25,7 +25,7 @@ class ChoresController < ApplicationController
 
     @chore.save
     Chore.remind(@chore.id)
-    
+
     # TODO: Create chore rotation assignments if rotation if there is a repeat
     if Integer(params[:chore][:repeat_days]) > 0
       ChoreRotation.assign_rotation(@chore.id, @chore.group_id, @chore.user_id)

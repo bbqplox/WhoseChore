@@ -45,31 +45,24 @@
   </div>
   <% else %>
     <!-- User id defaults to current user if not admin -->
-    <%= f.hidden_field :user_id, value: @group.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
   <% end %>
 
   <!-- Group selection prompt will only appear if chore was not created through a group -->
   <div class="field">
-  <% if @group == nil %>
+  <% if @group %>
+    <!-- Pass which group a chore belongs to if the user creates it from within a group. -->
+    <%= f.hidden_field :group_id, value: @group.id %>
+  <% else %>
     <%= f.label "Group" %><br>
     <%= f.select :group_id, options_from_collection_for_select(Group.active_user_groups(current_user.id), 'id', 'name', f.object.group_id)%>
-  <% else %>
-    <!-- Ghetto Workaround for right now. need to hide -->
-    <%= f.label "Current Group" %><br>
-    <%= f.hidden_field :group_id, value: @group.id %>
   <% end %>
   </div>
 
   <div class="field">
     <%= f.label "Repeat Days" %><br>
-    <%= f.select :repeat_days, 0.. 30 %>
+    <%= f.number_field :repeat_days, min: 0 %>
   </div>
-
-<!--
-  <div class="field">
-    <%= f.label "Complete" %>
-    <%= f.check_box :complete %>
-  </div> -->
 
   <div class="actions">
     <%= f.submit %>
