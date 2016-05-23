@@ -123,8 +123,8 @@
                           </tbody>
                         </table> <br>
 
-                        <% if Membership.search(current_user.id, params[:id]).first != nil && Membership.search(current_user.id, params[:id]).first.active == true %>
-                        <%= link_to 'Assign Chore', new_chore_path(group_id: @group.id) %> <br> <br>
+                        <% if Membership.search(current_user.id, @group.id).first != nil && Membership.search(current_user.id, @group.id).first.active == true %>
+                          <%= link_to 'Assign Chore', new_chore_path(group_id: @group.id) %> <br> <br>
                         <% end %>
 
                         <p>Completed</p>

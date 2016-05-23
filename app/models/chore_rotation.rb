@@ -10,7 +10,7 @@ class ChoreRotation < ActiveRecord::Base
     """
     @group = Group.find(group_id)
     @count = 1
-    for user in @group.users.each do
+    for user in User.active_user_groups(@group.id).each do
       if user.id != user_id
         @chore_rotation = ChoreRotation.new(
         chore_id: chore_id, user_id: user.id, group_id: @group.id, order: @count)

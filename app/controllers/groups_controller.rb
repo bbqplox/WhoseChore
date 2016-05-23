@@ -19,24 +19,17 @@ class GroupsController < ApplicationController
   end
 
   def create
+    """
+    Create a group with the current user added as an admin by default.
+    """
     @group = Group.new(group_params)
-    # TODO: need to give admin
-    @group.users << current_user
+    @group.save
+    @membership = Membership.new(
+      group_id: @group.id, user_id: current_user.id,
+      chore_score: 0, active: true, admin: true, group_id: @group.id)
 
-    respond_to do |format|
-      if @group.save
-        #Membership.give_user_admin(current_user.id, @group.id)
-        @membership = Membership.search(current_user.id, @group.id).first
-        @membership.chore_score = 0
-        @membership.admin = true
-        @membership.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
-        format.json { render :show, status: :created, location: @group }
-      else
-        format.html { render :new }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
-    end
+    @membership.save
+    redirect_to @group, notice: 'Group was successfully created.'
   end
 
   def update
@@ -49,6 +42,7 @@ class GroupsController < ApplicationController
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   def add_member
@@ -73,7 +67,6 @@ class GroupsController < ApplicationController
     if @user != nil and  @membership == nil
 
       @membership = Membership.new(group_id: @group.id, user_id: @user.id, chore_score:0)
-      @membership.active = true
       @notice = 'Welcome to the group!'
 
     # membership for the user already exists
@@ -128,10 +121,7 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     Membership.disband_group(@group.id)
-    respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to groups_url, notice: 'Group was successfully destroyed.'
   end
 
   private
