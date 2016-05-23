@@ -54,7 +54,7 @@
                             <% @sender = User.find(invite.sender_id) %>
                             <tr>
                               <td><%= @sender.first_name + " " + @sender.last_name %></td>
-                              <td><%= link_to 'Accept', add_group_member_path(invite.group_id, user_id: invite.user_id), method: :put %></td>
+                              <td><%= link_to 'Accept', add_group_member_path(invite.group_id, user_id: invite.user_id, invite_id: invite.id), method: :put %></td>
                               <td><%= link_to 'Decline', invite, method: :delete %></td>
                             </tr>
                           <% end %>

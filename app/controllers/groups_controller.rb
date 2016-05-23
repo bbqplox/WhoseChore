@@ -57,6 +57,11 @@ class GroupsController < ApplicationController
     """
     Forms mapping between user and group. Reactivates membership if already exists.
     """
+    if params[:invite_id]
+      @invite = GroupInvite.find(params[:invite_id])
+      @invite.destroy
+    end
+
     @user = User.find(params[:user_id])
 
     if @user != nil

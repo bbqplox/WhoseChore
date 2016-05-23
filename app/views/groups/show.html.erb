@@ -81,8 +81,9 @@
                               <tr>
                                 <td><%= user.first_name + " " + user.last_name %></td>
                                 <td><%= link_to 'View Profile', user_url(user.id) %></td>
-                                <td><%#= link_to 'Banish', memberships_url(:user => user.id, :group => @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                                <% if Membership.search(current_user.id, params[:id]).first != nil %>
                                 <td><%= link_to 'Banish', remove_group_member_path(@group, :user_id => user.id, :group_id => @group.id), data: { confirm: 'Are you sure?' } %></td>
+                                <% end %>
                               </tr>
                             <% end %>
                           </tbody>
@@ -110,14 +111,18 @@
                                 <td><%= chore.name %></td>
                                 <td><%= chore.date %></td>
                                 <td><%= @name %></td>
+                                <% if Membership.search(current_user.id, params[:id]).first != nil %>
                                 <td><%= link_to 'Show', chore_url(chore.id, from: group_url(@group.id)) %></td>
                                 <td><%= link_to 'Edit', edit_chore_path(chore, from: group_url(@group.id)) %></td>
                                 <td><%= link_to 'Complete', chore_complete_path(chore, from: group_url(@group.id)) %> </td>
+                                <% end %>
                               </tr>
                             <% end %>
                           </tbody>
                         </table> <br>
+                        <% if Membership.search(current_user.id, params[:id]).first != nil %>
                         <%= link_to 'New Chore', new_chore_path(:group_id => @group.id) %> <br> <br>
+                        <% end %>
                         <p>Completed</p>
                           <table>
                             <thead>
@@ -140,9 +145,11 @@
                               <td><%= chore.name %></td>
                               <td><%= chore.date %></td>
                               <td><%= @name %></td>
+                              <% if Membership.search(current_user.id, params[:id]).first != nil %>
                               <td><%= link_to 'Show', chore_url(chore.id, from: group_url(@group.id)) %></td>
                               <td><%= link_to 'Edit', edit_chore_path(chore, from: group_url(@group.id)) %></td>
                               <td><%= link_to 'Destroy', chore_url(chore.id, from: group_url(@group.id)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                              <% end %>
                               </tr>
                             <% end %>
                             </tbody>
