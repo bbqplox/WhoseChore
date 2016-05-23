@@ -2,45 +2,39 @@ class ChoresController < ApplicationController
   before_action :set_chore, only: [:show, :edit, :update, :destroy]
   before_action :require_user, only: [:index, :show]
 
-  # GET /chores
-  # GET /chores.json
   def index
     @chores = Chore.all
   end
 
-  # GET /chores/1
-  # GET /chores/1.json
   def show
   end
 
-  # GET /chores/new
   def new
+    if params[:group_id]
+      @group = Group.find(params[:group_id])
+    end
+    @users = @group.users
     @chore = Chore.new
   end
 
-  # GET /chores/1/edit
   def edit
   end
 
-  # POST /chores
-  # POST /chores.json
   def create
     @chore = Chore.new(chore_params)
-    current_user.chores << @chore
 
-    respond_to do |format|
-      if @chore.save
-        format.html { redirect_to edit_chore_path(@chore.id), notice: 'Chore was successfully created.' }
-        format.json { render :show, status: :created, location: @chore }
-      else
-        format.html { render :new }
-        format.json { render json: @chore.errors, status: :unprocessable_entity }
-      end
+    @chore.save
+    Chore.remind(@chore.id)
+    
+    # TODO: Create chore rotation assignments if rotation if there is a repeat
+    if Integer(params[:chore][:repeat_days]) > 0
+      ChoreRotation.assign_rotation(@chore.id, @chore.group_id, @chore.user_id)
     end
+
+    redirect_to edit_chore_path(@chore.id), notice: 'Chore was successfully created.'
+
   end
 
-  # PATCH/PUT /chores/1
-  # PATCH/PUT /chores/1.json
   def update
     respond_to do |format|
       if @chore.update(chore_params)
@@ -93,6 +87,6 @@ class ChoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chore_params
-      params.require(:chore).permit(:user_id, :name, :description, :date, :group_id, :complete, :score)
+      params.require(:chore).permit(:user_id, :name, :description, :date, :group_id, :complete, :score, :repeat_days)
     end
 end

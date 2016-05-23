@@ -5,8 +5,10 @@ class User < ActiveRecord::Base
 	before_create :build_hub
 	has_secure_password
 	has_many :memberships
-	has_many :groups, :through => :memberships
+	has_many :groups, through: :memberships
 	has_many :chores
+	has_many :chore_rotations
+	has_many :chore_invites
 	has_many :group_invites
 
 	def self.search_index(search)

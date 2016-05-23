@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522012307) do
+ActiveRecord::Schema.define(version: 20160523011351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,21 @@ ActiveRecord::Schema.define(version: 20160522012307) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "chore_rotations", force: :cascade do |t|
+  create_table "chore_requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "chore_id"
+    t.integer  "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "chore_rotations", force: :cascade do |t|
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "chore_id"
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.integer  "order",      default: 0
   end
 
   create_table "chores", force: :cascade do |t|
@@ -38,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160522012307) do
     t.integer  "group_id"
     t.boolean  "complete",    default: false
     t.integer  "score",       default: 0
+    t.integer  "repeat_days", default: -1
   end
 
   create_table "group_invites", force: :cascade do |t|

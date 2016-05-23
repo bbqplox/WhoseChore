@@ -31,30 +31,45 @@
     <%= f.select :date, Date.today.. 2.week.from_now %>
   </div>
 
-  <% if Group.exists?(@chore.group_id)%>
-    <% @admin = Membership.search(current_user.id, @chore.group_id).first.admin %>
+  <% if @group %>
+    <% @admin = Membership.search(current_user.id, @group.id).first.admin %>
   <% else %>
     <% @admin = false %>
   <% end %>
 
+  <% if @admin %>
   <div class="field">
-    <% if @admin == true %>
       <%= f.label "Person Responsible" %> <br>
       <%#@group = Group.find(@chore.group_id)%>
-      <%= f.select :user_id, options_from_collection_for_select(User.active_group_users(@chore.group_id), 'id', 'first_name', f.object.user_id)%>
-    <% end %>
+      <%= f.select :user_id, options_from_collection_for_select(@users, 'id', 'first_name', f.object.user_id)%>
+  </div>
+  <% else %>
+    <!-- User id defaults to current user if not admin -->
+    <%= f.hidden_field :user_id, value: @group.id %>
+  <% end %>
+
+  <!-- Group selection prompt will only appear if chore was not created through a group -->
+  <div class="field">
+  <% if @group == nil %>
+    <%= f.label "Group" %><br>
+    <%= f.select :group_id, options_from_collection_for_select(Group.active_user_groups(current_user.id), 'id', 'name', f.object.group_id)%>
+  <% else %>
+    <!-- Ghetto Workaround for right now. need to hide -->
+    <%= f.label "Current Group" %><br>
+    <%= f.hidden_field :group_id, value: @group.id %>
+  <% end %>
   </div>
 
   <div class="field">
-    <%= f.label "Group" %><br>
-    <%= f.select :group_id, options_from_collection_for_select(Group.active_user_groups(current_user.id), 'id', 'name', f.object.group_id)%>
+    <%= f.label "Repeat Days" %><br>
+    <%= f.select :repeat_days, 0.. 30 %>
   </div>
 
-
+<!--
   <div class="field">
     <%= f.label "Complete" %>
     <%= f.check_box :complete %>
-  </div>
+  </div> -->
 
   <div class="actions">
     <%= f.submit %>
