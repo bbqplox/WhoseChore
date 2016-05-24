@@ -1,5 +1,5 @@
 class ChoresController < ApplicationController
-  before_action :set_chore, only: [:show, :edit, :update, :destroy]
+  before_action :set_chore, only: [:show, :edit, :update, :destroy, :completion]
   before_action :require_user, only: [:index, :show]
 
   def index
@@ -66,13 +66,18 @@ class ChoresController < ApplicationController
   end
 
   def completion
-    @chore = Chore.find(params[:id])
-    @membership = Membership.search(@chore.user_id, @chore.group_id).first
 
+    # assign a new choe based on the rotation
+    if @chore.repeat_days > 0
+      ChoreRotation.pop_rotation(@chore.id)
+    end
+
+    # update chore score
+    @membership = Membership.search(@chore.user_id, @chore.group_id).first
     @chore.update_attribute(:complete, true)
     @membership.update_attribute(:chore_score, @membership.chore_score + @chore.score)
-
     @membership.save
+
     respond_to do |format|
       format.html { redirect_to params[:from], notice: 'Chore completed' }
       format.json { head :no_content }

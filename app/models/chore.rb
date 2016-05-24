@@ -7,8 +7,15 @@ class Chore < ActiveRecord::Base
     # TODO: add mail reminder for user
   end
 
-  def self.incomplete_group()
-    where(["completed = ?", false])
+  def self.incomplete()
+    where(["completed = false"])
+  end
+
+  def self.destroy_all_completed(user_id)
+    @chores = where(["complete = true AND user_id = ?", "#{user_id}"])
+    for chore in @chores.each
+      chore.destroy
+    end
   end
 
 end

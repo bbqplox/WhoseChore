@@ -35,25 +35,29 @@ class ChoreRotation < ActiveRecord::Base
     # copy the chore for the next rotation
     @new_chore = @chore.dup
     @new_chore.date = @new_date
+    @new_chore.complete = false
     # save to assign an id
     @new_chore.save
 
-    @chore_rotations = search_by_chore_id(chore_id)
+    @chore_rotations = @chore.chore_rotations
     for chore_rotation in @chore_rotations.each do
       # member who was doing the chore last
       if chore_rotation.order == 0
-        chore_rotation.order = @chore_rotaions.size
+        chore_rotation.order = @chore_rotations.size
       end
 
-      # member will be doing the chore next
-      if chore_rotation.order == 1
-        @new_chore.user_id = chore_rotation.user_id
-        @new_chore.save
-        Chore.assign(@new_chore.id)
-      end
       # update rotationwith the new chore id
       chore_rotation.chore_id = @new_chore.id
       chore_rotation.order -= 1
+      chore_rotation.save
+      
+      # member will be doing the chore next
+      if chore_rotation.order == 0
+        @new_chore.user_id = chore_rotation.user_id
+        @new_chore.save
+        #Chore.remind(@new_chore.id)
+      end
+
     end
   end
 

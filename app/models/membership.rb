@@ -21,11 +21,11 @@ class Membership < ActiveRecord::Base
   end
 
   def self.active_user_memberships(user_id)
-    where(["user_id = ?", "#{user_id}"])
+    where(["user_id = ? and active = true", "#{user_id}"])
   end
 
   def self.active_group_memberships(group_id)
-    where(["group_id = ?", "#{group_id}"])
+    where(["group_id = ? and active = true", "#{group_id}"])
   end
 
   def self.disband_group(group_id)
