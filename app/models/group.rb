@@ -15,4 +15,8 @@ class Group < ActiveRecord::Base
     @groups
   end
 
+  def self.kick_member(group_id, user_id)
+    
+  end
+
 end

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 	    	if @user.save
 	      	session[:user_id] = @user.id
 					UserMailer.welcome_email(@user).deliver_later
-	      	redirect_to '/profile'
+	      	redirect_to '/main'
 	    	else
 	      	redirect_to '/'
 				end

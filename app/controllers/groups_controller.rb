@@ -93,8 +93,9 @@ class GroupsController < ApplicationController
     Deactivate membership between user and group.
     """
     @user = User.search_by_id(params[:user_id]).first
-    #@group = Group.find(params[:id])
+
     @membership = Membership.search(@user.id, @group.id).first
+    
     # membership must already exist
     if @membership != nil
       @membership.active = false
