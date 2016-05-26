@@ -1,2 +1,0 @@
-class HelloworldController < ApplicationController
-end
