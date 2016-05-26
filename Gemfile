@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
-
 ruby "2.3.0"
+
+# Webserver
+gem 'puma'
 # Static asset serving & logging on Heroku
 gem 'rails_12factor', group: :production
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
