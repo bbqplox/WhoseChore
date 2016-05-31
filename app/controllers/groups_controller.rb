@@ -86,6 +86,8 @@ class GroupsController < ApplicationController
       @membership.save
     end
 
+    ChoreRotation.add_rotation_member(@user.id, @group.id)
+
     redirect_to @group, notice: @notice
   end
 
@@ -109,6 +111,9 @@ class GroupsController < ApplicationController
     if @membership != nil
       @membership.save
     end
+
+    ChoreRotation.remove_rotation_member(@user.id, @group.id)
+
     redirect_to @group, notice: @notice
   end
 

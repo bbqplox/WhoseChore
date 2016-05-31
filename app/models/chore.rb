@@ -18,4 +18,8 @@ class Chore < ActiveRecord::Base
     end
   end
 
+  def self.search_by_group_id(group_id)
+		where(["group_id = ?", "#{group_id}"])
+	end
+
 end
