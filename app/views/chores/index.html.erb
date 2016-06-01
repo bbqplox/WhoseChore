@@ -30,7 +30,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
@@ -54,7 +53,7 @@
 						      <th class="txt">Date</th>
 						      <th class="txt">Score</th>
                               <th class="txt">Group</th>
-						      <th colspan="3"></th>
+						      <th class="txt" colspan="3"></th>
 						    </tr>
 						  </thead>
 
@@ -71,8 +70,14 @@
 						        <td class="txt2"><%= chore.date %></td>
                                 <td class="txt2"><%= chore.score %></td>
 						        <td class="txt2"><%= @name %></td>
+                                  
+                                  
                                 <td><%= link_to 'Show', chore_url(chore.id,from: chores_url), :class => "btn btn-info btn-simple btn-xs" %></td>
+                                  
+                            
                                 <td><%= link_to 'Edit', edit_chore_path(chore), :class => "btn btn-info btn-simple btn-xs " %></td>
+                                  
+                                
                                 <td><%= link_to 'Complete', chore_complete_path(chore, from: chores_url), :class => "btn complete color-4" %> </td>
 						      </tr>
 						    <% end %>
@@ -93,7 +98,7 @@
 						      <th class="txt">Date</th>
 						      <th class="txt">Score</th>
                               <th class="txt">Group</th>
-						      <th colspan="3"></th>
+						      <th class="txt" colspan="3"></th>
 						    </tr>
 						  </thead>
 

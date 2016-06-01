@@ -12,11 +12,11 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, b, u, i, c
 }
 
 body {
-  background-image: url(404.jpg);
+  background-image: url(../../assets/images/404.jpg);
 }
 
 body .login {
-  background: url(bg.png);
+  background: url(../../assets/images/bg.png);
 }
 
 h2 {
@@ -31,7 +31,7 @@ h2 {
 
 .loginbox {
   background: #FBFCFD;
-    background: url(bg.png);
+    background: url(../../assets/images/bg.png);
   padding: 5px;
   width: 490px;
   margin-top: 25px;
