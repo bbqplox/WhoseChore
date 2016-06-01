@@ -125,4 +125,22 @@ class ChoreRotation < ActiveRecord::Base
     end
   end
 
+  def self.member_order(chore_id)
+    """
+    Returns the list of all member in the chore rotation in their order.
+    """
+    @chore = Chore.find(chore_id)
+    @users = []
+
+    # return empty list if not a repeated chore
+    if @chore.repeat_days > 0
+      @chore_rotations = ChoreRotation.search_by_chore_id(chore_id)
+      @chore_rotations.sort {|a,b| a.order <=> b.order }.each do |chore_rotation|
+        @user = User.find(chore_rotation.user_id)
+        @users << @user
+      end
+    end
+    @users
+  end
+
 end
