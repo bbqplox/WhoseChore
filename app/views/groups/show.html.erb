@@ -126,7 +126,7 @@
                                 <% @member_order = ChoreRotation.member_order(chore.id) %>
                                 <% if @member_order.size > 1%>
                                   <td class="txt2"><%=  @member_order[1].first_name %></td>
-                                <% else %>
+                                <% elsif @member_order.size == 1 %>
                                   <td class="txt2"><%= @member_order[0].first_name %></td>
                                 <% end %>
                                 <% if Membership.search(current_user.id, params[:id]).first != nil && Membership.search(current_user.id, params[:id]).first.active == true%>
