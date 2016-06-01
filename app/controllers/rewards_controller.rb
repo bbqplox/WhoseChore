@@ -14,6 +14,9 @@ class RewardsController < ApplicationController
 
   # GET /rewards/new
   def new
+    if params[:group_id]
+      @group = Group.find(params[:group_id])
+    end
     @reward = Reward.new
   end
 
@@ -28,7 +31,8 @@ class RewardsController < ApplicationController
 
     respond_to do |format|
       if @reward.save
-        format.html { redirect_to @reward, notice: 'Reward was successfully created.' }
+        @group = Group.find(@reward.group_id)
+        format.html { redirect_to @group, notice: 'Reward was successfully created.' }
         format.json { render :show, status: :created, location: @reward }
       else
         format.html { render :new }
@@ -42,7 +46,8 @@ class RewardsController < ApplicationController
   def update
     respond_to do |format|
       if @reward.update(reward_params)
-        format.html { redirect_to @reward, notice: 'Reward was successfully updated.' }
+        @group = Group.find(@reward.group_id)
+        format.html { redirect_to @group, notice: 'Reward was successfully updated.' }
         format.json { render :show, status: :ok, location: @reward }
       else
         format.html { render :edit }
@@ -56,13 +61,33 @@ class RewardsController < ApplicationController
   def destroy
     @reward.destroy
     respond_to do |format|
-      format.html { redirect_to rewards_url, notice: 'Reward was successfully destroyed.' }
+      @group = Group.find(@reward.group_id)
+      format.html { redirect_to @group, notice: 'Reward was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   def purchase
+    @reward = Reward.find(params[:id])
+    @membership = Membership.search(current_user.id, @reward.group_id).first
+    @notice = 'Not enough Chore Score'
+
+    if @reward.cost <= @membership.chore_score
+      @reward.update_attribute(:claimed_time, Date.today)
+      @reward.update_attribute(:user_id, current_user.id)
+      @reward.save
+      @membership.update_attribute(:chore_score, @membership.chore_score - @reward.cost)
+      @membership.save
+      @notice = 'Reward purchased'
+    end
+
+    respond_to do |format|
+      format.html { redirect_to params[:from], notice: @notice }
+      format.json { head :no_content }
+    end
+
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -72,6 +97,6 @@ class RewardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reward_params
-      params.require(:reward).permit(:name, :description, :cost)
+      params.require(:reward).permit(:name, :description, :cost, :group_id, :user_id, :claimed_time)
     end
 end

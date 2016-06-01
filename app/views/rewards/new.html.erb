@@ -1,5 +1,78 @@
-<h1>New Reward</h1>
+<%= stylesheet_link_tag 'chores' %>
+<!DOCTYPE html>
+<html lang="en">
 
-<%= render 'form' %>
+<head>
 
-<%= link_to 'Back', rewards_path %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row choreContent">
+                    <div class="col-lg-12">
+                      <h1 class="black">New Reward</h1>
+                      <div class="container">
+                        <!--Do we really need this line?-->
+                        <div>
+                            <a href="#" class="clear-text"><i class="fa fa-trash-o fa-2x"></i></a>
+                            <a href="#" class="add-todo"><i class="fa fa-plus fa-2x"></i></a>
+                        </div> <!-- div.row -->
+                        <!--Seriously?-->
+                        <div class="row">
+                        <%= render 'form' %>
+                          <div class="error">
+                            <a href="#"><i class="fa fa-times"></i></a>
+                            <p>We both know you should be doing something right now. Please enter a task.</p>
+                          </div> <!-- div.error -->
+                          <!-- Start to-do list -->
+                          <ul class="todo-list col-xs-12">
+                          </ul>
+                        </div> <!-- div.row -->
+                      </div> <!-- div.container -->
+
+
+
+                      <%= link_to 'Back', :back ,:class => "btn btn-4 btn-4d icon-arrow-left color-4" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

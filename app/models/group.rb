@@ -4,7 +4,8 @@ class Group < ActiveRecord::Base
   has_many :administrators
   has_many :chores
   has_many :chore_rotations
-
+  has_many :rewards
+  
   def self.active_user_groups(user_id)
     @memberships = Membership.active_user_memberships(user_id)
     @groups = []
@@ -16,7 +17,7 @@ class Group < ActiveRecord::Base
   end
 
   def self.kick_member(group_id, user_id)
-    
+
   end
 
 end

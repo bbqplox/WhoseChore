@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    
+
   # ERR MSG... so salty
   match "/404", :to => "errors#not_found", :via => :all
   match "/500", :to => "errors#internal_server_error", :via => :all
@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'errors/not_found'
 
   get 'errors/internal_server_error'
-    
+
   if Rails.env.production?
    get '404', :to => 'application#page_not_found'
   end
@@ -58,8 +58,8 @@ Rails.application.routes.draw do
     get '/main' => 'hub#show'
 
       get '/chores' => 'chores#index'
-    get '/rewards' => 'rewardpunishment#index'
-    get '/punishments' => 'rewardpunishment#index'
+    get '/rewards/:id/purchase' => 'rewards#purchase', :as => 'purchase_reward'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
