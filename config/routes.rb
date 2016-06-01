@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     get '/groups/:id/remove_member/' => 'groups#remove_member', :as => 'remove_group_member'
     put '/groups/:id/add_member/' => 'groups#add_member', :as => 'add_group_member'
     post '/groups/:id/assign_chore/' => 'chores#assign', :as => 'assign_chore'
+    get '/groups/:id/rewards' => 'groups#rewards', :as => 'group_rewards'
 
     # For group invites
     post '/groups/:id/invite/' => 'group_invites#create', :as => 'invite_member'

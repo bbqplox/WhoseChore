@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :require_admin, :add_member, :remove_member]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :require_admin, :add_member, :remove_member, :rewards]
   before_action :require_user, only: [:index, :show]
   before_action :require_admin, only: [:destroy, :remove_member]
 
@@ -129,6 +129,9 @@ class GroupsController < ApplicationController
     @group.destroy
     Membership.disband_group(@group.id)
     redirect_to groups_url, notice: 'Group was successfully destroyed.'
+  end
+
+  def rewards
   end
 
   private

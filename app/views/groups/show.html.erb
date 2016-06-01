@@ -183,36 +183,10 @@
 
                         </div><br>
 
-                        <div class = "choreContent">
-                          <h5>Rewards | Current Score:
-                          <%=Membership.search(current_user.id, @group.id).first.chore_score %>
-                          </h5>
-                          <table>
-                            <thead>
-                              <tr>
-                                <th class="txt">Reward</th>
-                                <th class="txt">Cost</th>
-                              </tr>
-                            </thead>
-
-                            <tbody>
-                              <% @group.rewards.sort {|a,b| a.cost <=> b.cost}.each do |reward| %>
-                              <% if reward.user_id == -1 %>
-                                <tr>
-                                  <td class="txt2"><%= reward.name %></td>
-                                  <td class="txt2"><%= reward.cost%></td>
-                                  <td><%= link_to 'Purchase', purchase_reward_path(reward.id, from: group_url(@group.id)), :class => "btn btn-info btn-simple btn-xs" %></td>
-                                  <td><%= link_to 'Description', reward, :class => "btn btn-info btn-simple btn-xs"%></td>
-                                </tr>
-                                <%end%>
-                              <%end%>
-                            </tbody>
-                          </table>
-
-                        </div><br>
-                        <% if Membership.search(current_user.id, @group.id).first != nil && Membership.search(current_user.id, @group.id).first.active == true && Membership.search(current_user.id, @group.id).first.admin == true%>
-                          <%= link_to 'New Reward', new_reward_path(group_id: @group.id), :class => "btn btn-2 btn-2d" %> <br> <br>
+                        <% if Membership.search(current_user.id, @group.id).first != nil && Membership.search(current_user.id, @group.id).first.active == true%>
+                          <%= link_to 'Rewards', group_rewards_path(@group.id), :class => "btn btn-2 btn-2d" %> <br> <br>
                         <% end %>
+
 
                     </div>
                 </div>

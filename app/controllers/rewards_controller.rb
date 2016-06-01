@@ -32,7 +32,7 @@ class RewardsController < ApplicationController
     respond_to do |format|
       if @reward.save
         @group = Group.find(@reward.group_id)
-        format.html { redirect_to @group, notice: 'Reward was successfully created.' }
+        format.html { redirect_to group_rewards_path(@group.id), notice: 'Reward was successfully created.' }
         format.json { render :show, status: :created, location: @reward }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class RewardsController < ApplicationController
     respond_to do |format|
       if @reward.update(reward_params)
         @group = Group.find(@reward.group_id)
-        format.html { redirect_to @group, notice: 'Reward was successfully updated.' }
+        format.html { redirect_to group_rewards_path(@group.id), notice: 'Reward was successfully updated.' }
         format.json { render :show, status: :ok, location: @reward }
       else
         format.html { render :edit }
