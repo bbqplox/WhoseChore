@@ -1,0 +1,133 @@
+<%= stylesheet_link_tag 'hub' %>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Profile</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <div class = "choreContent">
+                            <h1> Welcome to WhoseChore </h1>
+                               <h5>Your Chores To Do</h5>
+                     						<table>
+                     						  <thead>
+                     						    <tr>
+                     						      <th class="txt">Name</th>
+                     						      <th class="txt">Date</th>
+                     						      <th class="txt">Score</th>
+                                      <th class="txt">Group</th>
+                     						      <th class="txt" colspan="3"></th>
+                     						    </tr>
+                     						  </thead>
+
+                     						  <tbody>
+                                    <% @choreit = 0 %>
+                     						    <% current_user.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+                     						      <% next if chore.complete == true %>
+                     						        <% if Group.exists?(chore.group_id) %>
+                     						          <% @name = Group.find(chore.group_id).name %>
+                     						        <% else %>
+                     						          <% @name = 'None' %>
+                     						        <% end %>
+                     						      <tr>
+                     						        <td class="txt2"><%= chore.name %></td>
+                     						        <td class="txt2"><%= chore.date %></td>
+                                        <td class="txt2"><%= chore.score %></td>
+                     						        <td class="txt2"><%= @name %></td>
+
+                                        <td><%= link_to 'Show', chore_url(chore.id,from: main_url), :class => "btn btn-info btn-simple btn-xs" %></td>
+                                        <% @choreit = @choreit + 1 %>
+                                        <% if @choreit == 5 %>
+                                          <% break %>
+                                        <% end %>
+                     						      </tr>
+                     						    <% end %>
+                     						  </tbody>
+                     						</table> <br>
+                          </div> <br>
+                          <div class = "choreContent">
+                      						<h5>Recently Completed Chores</h5>
+                      						<table>
+                      						  <thead>
+                      						    <tr>
+                      						      <th class="txt">Name</th>
+                      						      <th class="txt">Date</th>
+                      						      <th class="txt">Score</th>
+                                                    <th class="txt">Group</th>
+                      						      <th class="txt" colspan="3"></th>
+                      						    </tr>
+                      						  </thead>
+
+                      						  <tbody>
+                                      <% @choreit = 0 %>
+                      						<% Chore.all.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+                      						  <% next if chore.complete == false %>
+                      						    <% if Group.exists?(chore.group_id) %>
+                      						      <% @name = Group.find(chore.group_id).name %>
+                      						    <% else %>
+                      						      <% @name = 'None' %>
+                      						    <% end %>
+                      						  <tr>
+                      						    <td class="txt2"><%= chore.name %></td>
+                      						    <td class="txt2"><%= chore.date %></td>
+                                      <td class="txt2"><%= chore.score %></td>
+                      						    <td class="txt2"><%= @name %></td>
+                                      <td><%= link_to 'Show', chore_url(chore.id,from: main_url), :class => "btn btn-info btn-simple btn-xs" %></td>
+                                      <% @choreit = @choreit + 1 %>
+                                      <% if @choreit == 5 %>
+                                          <% break %>
+                                      <% end %>
+                      						  </tr>
+                      						<% end %>
+                      						</tbody>
+                      						</table>
+                      						<br></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

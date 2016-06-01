@@ -54,8 +54,7 @@ Rails.application.routes.draw do
     get '/profile/:id' => 'profile#show'
     get '/edit_profile/' => 'profile#edit'
 
-    resources :hub, only: [:show]
-    get '/main' => 'hub#show'
+    get '/main' => 'hub#index', :as => 'main'
 
       get '/chores' => 'chores#index'
     get '/rewards/:id/purchase' => 'rewards#purchase', :as => 'purchase_reward'
