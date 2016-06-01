@@ -77,7 +77,6 @@
                             <tr>
                               <th class="txt">Name</th>
                               <th class="txt">Admin</th>
-                              <th class="txt">Active</th>
                               <th colspan="3"></th>
                             </tr>
                           </thead>
@@ -88,7 +87,6 @@
                               <tr>
                                 <td class="txt2"><%= user.first_name + " " + user.last_name %></td>
                                 <td class="txt2"><%= @membership.admin %></td>
-                                <td class="txt2"><%= @membership.active %></td>
                                 <td><%= link_to 'View Profile', user_url(user.id), :class => "btn btn-info btn-simple btn-xs" %></td>
                                 <% if Membership.search(current_user.id, params[:id]).first != nil %>
                                 <td><%= link_to 'Banish', remove_group_member_path(@group, :user_id => user.id, :group_id => @group.id), :class => "btn btn-danger btn-simple btn-xs", data: { confirm: 'Are you sure?' } %></td>
