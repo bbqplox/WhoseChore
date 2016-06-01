@@ -82,7 +82,7 @@ class RewardsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to params[:from], notice: @notice }
+      format.html { redirect_to :back, notice: @notice }
       format.json { head :no_content }
     end
 

@@ -36,9 +36,6 @@
                     <div class="col-lg-12">
                       <p id="notice"><%= notice %></p>
 
-                        <h5>Current Score:</h5>
-                        <p> <%=  Membership.search(current_user.id, @reward.group_id).first.chore_score%></p>
-                        <p>
                           <strong>Name:</strong>
                           <%= @reward.name %>
                         </p>
@@ -80,7 +77,7 @@
                           <td><%=@reward.claimed_time %></td>
                         <% end %>
 
-                        <%= link_to 'Back', Group.find(@reward.group_id) %>
+                        <%= link_to 'Back', :back %>
 
 
                     </div>

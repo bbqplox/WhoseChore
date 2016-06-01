@@ -34,15 +34,6 @@
     <%= f.select :group_id, options_from_collection_for_select(Group.active_user_groups(current_user.id), 'id', 'name', f.object.group_id)%>
   <% end %>
   </div>  <!-- Group selection prompt will only appear if chore was not created through a group -->
-    <div class="field black">
-    <% if @group %>
-      <!-- Pass which group a chore belongs to if the user creates it from within a group. -->
-      <%= f.hidden_field :group_id, value: @group.id %>
-    <% else %>
-      <%= f.label "Group", :class => "black" %><br>
-      <%= f.select :group_id, options_from_collection_for_select(Group.active_user_groups(current_user.id), 'id', 'name', f.object.group_id)%>
-    <% end %>
-    </div>
 
   <div class="actions">
     <%= f.submit %>

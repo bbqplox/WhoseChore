@@ -63,6 +63,33 @@
               </table>
 
             </div><br>
+
+            <div class = "choreContent">
+              <h5>Rewards Purchased</h5>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="txt">Reward</th>
+                    <th class="txt">Owned By</th>
+                  </tr>
+                </thead>
+
+
+                <tbody>
+                  <% @group.rewards.sort {|a,b| a.cost <=> b.cost}.each do |reward| %>
+                  <% if reward.user_id != -1 %>
+                  <tr>
+                    <td class="txt2"><%= reward.name %></td>
+                    <td class="txt2"><%= User.find(reward.user_id).first_name%></td>
+                    <td><%= link_to 'Description', reward, :class => "btn btn-info btn-simple btn-xs"%></td>
+                  </tr>
+                  <%end%>
+                  <%end%>
+                </tbody>
+              </table>
+
+            </div><br>
+
             <% if Membership.search(current_user.id, @group.id).first != nil && Membership.search(current_user.id, @group.id).first.active == true && Membership.search(current_user.id, @group.id).first.admin == true%>
             <%= link_to 'New Reward', new_reward_path(group_id: @group.id), :class => "btn btn-2 btn-2d" %> <br> <br>
             <% end %>
