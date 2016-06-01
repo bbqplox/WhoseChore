@@ -50,6 +50,7 @@ class ChoresController < ApplicationController
   # DELETE /chores/1
   # DELETE /chores/1.json
   def destroy
+    ChoreRotation.remove_rotation(@chore.id)
     @chore.destroy
     respond_to do |format|
       format.html { redirect_to params[:from], notice: 'Chore was successfully destroyed.' }

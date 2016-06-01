@@ -14,6 +14,7 @@ class Chore < ActiveRecord::Base
   def self.destroy_all_completed(user_id)
     @chores = where(["complete = true AND user_id = ?", "#{user_id}"])
     for chore in @chores.each
+      ChoreRotation.remove_rotation(chore.id)
       chore.destroy
     end
   end
