@@ -271,13 +271,14 @@ $red: #ff5252;
 $green: #69f0ae;
 $white-border: 1px solid $white;
 
-.field-name, .field-desc, .field-score, .field-date, .black {
+.field, .field-name, .field-desc, .field-score, .field-date, .field-complete, .black {
     color: $black-color;
 }
 
 body {
   background-image: url(homepage.jpg);
   background-size: 100%;
+  background-repeat: no-repeat;
   box-shadow: 20%;
   //background: #ebfaff;
   color: $white;
@@ -302,6 +303,14 @@ body {
   font: 1.8em 'Oswald', Arial, sans-serif; //32px
   margin: 20px 0;
   text-align: center;    
+}
+
+.txt3 {
+  color: $new-black;
+  padding-left: 2%; //20px;
+  font: 1.8em 'Oswald', Arial, sans-serif; //32px
+  margin: 20px 0;
+  text-align: left; 
 }
 
 h5 {

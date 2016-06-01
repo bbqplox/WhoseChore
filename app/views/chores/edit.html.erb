@@ -32,12 +32,12 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row choreContent">
                     <div class="col-lg-12">
 
 <p id="notice"><%= notice %></p>
 
-<h1>Editing Chore</h1>
+<h1 class="black">Editing Chore</h1>
 <%= form_for(@chore) do |f| %>
   <% if @chore.errors.any? %>
     <div id="error_explanation">
@@ -51,22 +51,22 @@
     </div>
     <% end %>
 
-  <div class="field">
+  <div class="field-name">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
 
-  <div class="field">
+  <div class="field-desc">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
 
-  <div class="field">
+  <div class="field-score">
     <%= f.label :score %><br>
     <%= f.select :score, 1.. 10 %>
   </div>
 
-  <div class="field">
+  <div class="field-date">
     <%= f.label :date %><br>
     <%= f.select :date, Date.today.. 2.week.from_now %>
   </div>
@@ -85,17 +85,17 @@
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="field-complete">
     <%= f.label "Complete" %>
     <%= f.check_box :complete %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-2 btn-2d" %>
   </div>
   <% end %>
-                        <%= link_to 'Back to Groups', group_path(@chore.group_id) %>
-                        <%= link_to 'Back to Chores', chores_url %>
+                        <%= link_to 'Back to Groups', group_path(@chore.group_id),:class => "btn btn-4 btn-4d icon-arrow-left color-4" %>
+                        <%= link_to 'Back to Chores', chores_url,:class => "btn btn-4 btn-4d icon-arrow-left color-4" %>
 
                     </div>
                 </div>

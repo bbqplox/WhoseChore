@@ -32,26 +32,26 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row choreContent">
                     <div class="col-lg-12">
                       <p id="notice"><%= notice %></p>
 
-                        <p>
+                        <p class="txt3">
                           <strong>Name:</strong>
                           <%= @chore.name %>
                         </p>
 
-                        <p>
+                        <p class="txt3">
                           <strong>Description:</strong>
                           <%= @chore.description %>
                         </p>
 
-                        <p>
+                        <p class="txt3">
                           <strong>Chore Score:</strong>
                           <%= @chore.score %>
                         </p>
 
-                        <p>
+                        <p class="txt3">
                           <strong>Date:</strong>
                           <%= @chore.date %>
                         </p>
@@ -62,7 +62,7 @@
                           <% @name = 'None' %>
                         <% end %>
 
-                        <p>
+                        <p class="txt3">
                           <strong>Group:</strong>
                           <td><%= @name %></td>
                         </p>
@@ -73,9 +73,9 @@
                           <% @name = 'None' %>
                         <% end %>
 
-                        <p>
+                        <p class="txt3">
                           <strong>Person Responsible:</strong>
-                          <td class="black"><%=@name %></td>
+                          <td><%=@name %></td>
                         </p>
 
                         <% if @chore.complete == true %>
@@ -84,12 +84,12 @@
                           <% @name = "no" %>
                         <% end %>
 
-                        <p>
+                        <p class="txt3">
                           <strong>Complete?:</strong>
                           <td><%=@name %></td>
                         </p>
 
-                        <%= link_to 'Back', params[:from] %>
+                        <%= link_to 'Back', params[:from], :class => "btn btn-4 btn-4d icon-arrow-left color-4" %>
 
 
                     </div>
