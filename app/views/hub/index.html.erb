@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'hub' %>
+<%= stylesheet_link_tag 'chores' %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                       <div class = "choreContent">
-                            <h1> Welcome to WhoseChore </h1>
+                            <h1 class = "black"> Welcome to WhoseChore </h1>
                                <h5>Your Chores To Do</h5>
                      						<table>
                      						  <thead>
@@ -84,7 +84,7 @@
                       						      <th class="txt">Name</th>
                       						      <th class="txt">Date</th>
                       						      <th class="txt">Score</th>
-                                                    <th class="txt">Group</th>
+                                                    <th class="txt">Person Responsible</th>
                       						      <th class="txt" colspan="3"></th>
                       						    </tr>
                       						  </thead>
@@ -93,11 +93,11 @@
                                       <% @choreit = 0 %>
                       						<% Chore.all.sort {|a,b| a.date <=> b.date }.each do |chore| %>
                       						  <% next if chore.complete == false %>
-                      						    <% if Group.exists?(chore.group_id) %>
-                      						      <% @name = Group.find(chore.group_id).name %>
-                      						    <% else %>
-                      						      <% @name = 'None' %>
-                      						    <% end %>
+                                    <% if User.exists?(chore.user_id) %>
+                                      <% @name = User.find(chore.user_id).first_name %>
+                                    <% else %>
+                                      <% @name = 'None' %>
+                                    <% end %>
                       						  <tr>
                       						    <td class="txt2"><%= chore.name %></td>
                       						    <td class="txt2"><%= chore.date %></td>
