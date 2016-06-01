@@ -6,4 +6,11 @@ class UserMailer < ApplicationMailer
     @url = 'whosechore.herokuapp.com'
     mail(to: @user.email, subject: 'Welcome to whosechore!')
     end
+
+  def group_invite_email(user, group_name)
+    @user = user
+    @group_name = group_name
+    @url = 'whosechore.herokuapp.com'
+    mail(to: @user.email, subject: 'Whosechore Group Invite')
+    end
 end
