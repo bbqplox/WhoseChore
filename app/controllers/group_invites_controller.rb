@@ -12,7 +12,7 @@ class GroupInvitesController < ApplicationController
     respond_to do |format|
       if @group_invite.save
         format.html { redirect_to group_url(params[:invite][:group_id]), notice: 'Invite Sent.' }
-        UserMailer.group_invite_email(User.find(params[:invite][:user_id]), Group.find(params[:invite][:group_id])).deliver_later
+        UserMailer.group_invite_email(User.find(params[:invite][:user_id]), Group.find(params[:invite][:group_id]).name).deliver_later
         format.json { render :show, status: :created, location: @group_invite }
       else
         format.html { render :new }
