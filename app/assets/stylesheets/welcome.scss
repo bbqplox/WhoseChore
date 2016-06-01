@@ -12,11 +12,11 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, b, u, i, c
 }
 
 body {
-  background-image: url(../../assets/images/404.jpg);
+  background-image: url(/assets/404.jpg);
 }
 
 body .login {
-  background: url(../../assets/images/bg.png);
+  background: url(/assets/bg.png);
 }
 
 h2 {
@@ -31,7 +31,7 @@ h2 {
 
 .loginbox {
   background: #FBFCFD;
-    background: url(../../assets/images/bg.png);
+    background: url(/assets/bg.png);
   padding: 5px;
   width: 490px;
   margin-top: 25px;
@@ -43,7 +43,7 @@ h2 {
 
 .loginboxinner {
   background: #FBFCFD;
-    background: url(bg.png);
+    background: url(/assets/bg.png);
   padding: 5px;
   position: relative;
   border: 1px solid #FBFCFD;
@@ -148,7 +148,7 @@ h2 {
 
 #facebook-Bar {
   background: #45619D;
-    background-image: url(bg.png);
+    background-image: url(/assets/bg.png);
   border-bottom: 1px solid #0053A6;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.52);
   min-width: 1000px;
