@@ -44,19 +44,16 @@
                     <div class="col-lg-12">
 
           <p id="notice"><%= notice %></p>
-
-          <h1>Listing Chores</h1>
-
-          <p> To do </p>
-
-
+                        
+ <div class = "choreContent">
+          <h5>Whose Chores To Do</h5>
 						<table>
 						  <thead>
 						    <tr>
-						      <th>Name</th>
-						      <th>Date</th>
-						      <th>Group</th>
-                  <th>Score</th>
+						      <th class="txt">Name</th>
+						      <th class="txt">Date</th>
+						      <th class="txt">Score</th>
+                              <th class="txt">Group</th>
 						      <th colspan="3"></th>
 						    </tr>
 						  </thead>
@@ -70,30 +67,32 @@
 						          <% @name = 'None' %>
 						        <% end %>
 						      <tr>
-						        <td><%= chore.name %></td>
-						        <td><%= chore.date %></td>
-                    <td><%= chore.score %></td>
-						        <td><%= @name %></td>
-                    <td><%= link_to 'Show', chore_url(chore.id,from: chores_url) %></td>
-                    <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
-                    <td><%= link_to 'Complete', chore_complete_path(chore, from: chores_url) %> </td>
+						        <td class="txt2"><%= chore.name %></td>
+						        <td class="txt2"><%= chore.date %></td>
+                                <td class="txt2"><%= chore.score %></td>
+						        <td class="txt2"><%= @name %></td>
+                                <td><%= link_to 'Show', chore_url(chore.id,from: chores_url), :class => "btn btn-info btn-simple btn-xs" %></td>
+                                <td><%= link_to 'Edit', edit_chore_path(chore), :class => "btn btn-info btn-simple btn-xs " %></td>
+                                <td><%= link_to 'Complete', chore_complete_path(chore, from: chores_url), :class => "btn complete color-4" %> </td>
 						      </tr>
 						    <% end %>
 						  </tbody>
 						</table> <br>
+     </div>
 
-						<%= link_to 'New Chore', new_chore_path %> <br> <br>
+						<%= link_to 'New Chore', new_chore_path, :class => "btn btn-2 btn-2d" %> <br> <br>
 
-            <td><%= link_to 'Clear Chore History', destroy_all_completed_path(user_id: current_user.id), method: :destroy_all_completed, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Clear Chore History', destroy_all_completed_path(user_id: current_user.id), :class => "btn btn-danger btn-simple btn-xs", method: :destroy_all_completed, data: { confirm: 'Are you sure?' } %></td>
 
-						<p>Completed</p>
+    <div class = "choreContent">
+						<h5>Completed</h5>
 						<table>
 						  <thead>
 						    <tr>
-						      <th>Name</th>
-						      <th>Date</th>
-						      <th>Group</th>
-                  <th>Score</th>
+						      <th class="txt">Name</th>
+						      <th class="txt">Date</th>
+						      <th class="txt">Score</th>
+                              <th class="txt">Group</th>
 						      <th colspan="3"></th>
 						    </tr>
 						  </thead>
@@ -107,145 +106,23 @@
 						      <% @name = 'None' %>
 						    <% end %>
 						  <tr>
-						    <td><%= chore.name %></td>
-						    <td><%= chore.date %></td>
-                <td><%= chore.score %></td>
-						    <td><%= @name %></td>
-                <td><%= link_to 'Show', chore_url(chore.id,from: chores_url) %></td>
-                <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
-                <td><%= link_to 'Destroy', chore_url(chore.id, from: chores_url), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+						    <td class="txt2"><%= chore.name %></td>
+						    <td class="txt2"><%= chore.date %></td>
+                            <td class="txt2"><%= chore.score %></td>
+						    <td class="txt2"><%= @name %></td>
+                            <td><%= link_to 'Show', chore_url(chore.id,from: chores_url), :class => "btn btn-info btn-simple btn-xs" %></td>
+                            <td><%= link_to 'Edit', edit_chore_path(chore), :class => "btn btn-info btn-simple btn-xs" %></td>
+                            <td><%= link_to 'Destroy', chore_url(chore.id, from: chores_url), :class => "btn btn-danger btn-simple btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 						  </tr>
 						<% end %>
 						</tbody>
 						</table>
-						<br>
+						<br></div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
-
-        <!-- list -->
-                    <div class="col-md-6">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">Chores To-Do</h4>
-                            </div>
-                            <div class="content">
-                                <div class="table-full-width">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox" checked="">
-                                                    </label>
-                                                </td>
-                                                <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox" checked="">
-                                                    </label>
-                                                </td>
-                                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Read "Following makes Medium better"</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Unfollow 5 enemies from twitter</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        </div>
-        <!-- list end -->
 
     </div>
     <!-- /#wrapper -->

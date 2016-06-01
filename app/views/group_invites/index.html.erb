@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'chores' %>
 <%= stylesheet_link_tag 'hub' %>
 
 <!DOCTYPE html>
@@ -35,16 +36,16 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row choreContent">
                     <div class="col-lg-12">
                     <p id="notice"><%= notice %></p>
 
-                      <h1>Listing Invites</h1>
+                      <h1 class="black">Listing Invites</h1>
 
                       <table>
                         <thead>
                           <tr>
-                            <th>Name</th>
+                            <th class="txt">Name</th>
                             <th colspan="3"></th>
                           </tr>
                         </thead>
@@ -53,9 +54,9 @@
                           <% @current_user.group_invites.each do |invite| %>
                             <% @sender = User.find(invite.sender_id) %>
                             <tr>
-                              <td><%= @sender.first_name + " " + @sender.last_name %></td>
-                              <td><%= link_to 'Accept', add_group_member_path(invite.group_id, user_id: invite.user_id, invite_id: invite.id), method: :put %></td>
-                              <td><%= link_to 'Decline', invite, method: :delete %></td>
+                              <td class="txt2"><%= @sender.first_name + " " + @sender.last_name %></td>
+                              <td><%= link_to 'Accept', add_group_member_path(invite.group_id, user_id: invite.user_id, invite_id: invite.id), :class => "btn btn-2 btn-2d", method: :put %></td>
+                              <td><%= link_to 'Decline', invite, :class => "btn btn-danger btn-simple btn-xs", method: :delete %></td>
                             </tr>
                           <% end %>
                         </tbody>

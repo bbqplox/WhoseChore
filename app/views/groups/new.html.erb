@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'chores' %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,13 +32,13 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row choreContent">
                     <div class="col-lg-12">
-                    	<h1>New Group</h1>
+                    	<h1 class="black">New Group</h1>
 
 						<%= render 'form' %>
 
-						<%= link_to 'Back', groups_path %>
+						<%= link_to 'Back', groups_path,:class => "btn btn-4 btn-4d icon-arrow-left color-4" %>
                     </div>
                 </div>
             </div>

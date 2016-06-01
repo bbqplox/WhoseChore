@@ -1,30 +1,70 @@
-<p id="notice"><%= notice %></p>
+<%= stylesheet_link_tag 'chores' %>
+<!DOCTYPE html>
+<html lang="en">
 
-<h1>Listing Groups</h1>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  <tbody>
-    <% @current_user.groups.each do |group| %>
-      <!-- Do not display for inactive memberships -->
-      <% @membership = Membership.search(current_user.id, group.id).first %>
-      <% next if @membership.active == false %>
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <!-- Animation library for notifications   -->
+    <link href="assets/stylesheets/animate.min.css" rel="stylesheet"/>
 
-<br>
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
 
-<%= link_to 'New Group', new_group_path %>
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+</head>
+
+<body>
+    <p id="notice"><%= notice %></p>
+
+    <div class="choreContent">
+            <h1 class="black">Listing Groups</h1>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th class="txt">Name</th>
+                        <th colspan="3"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% @current_user.groups.each do |group| %>
+                    <!-- Do not display for inactive memberships -->
+                    <% @membership = Membership.search(current_user.id, group.id).first %>
+                    <% next if @membership.active == false %>
+                    <tr>
+                        <td><%= group.name %></td>
+                        <td><%= link_to 'Show', group, :class => "btn btn-info btn-simple btn-xs" %></td>
+                        <td><%= link_to 'Edit', edit_group_path(group), :class => "btn btn-info btn-simple btn-xs" %></td>
+                        <td><%= link_to 'Destroy', group, :class => "btn btn-danger btn-simple btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table><br>
+
+            <%= link_to 'New Group', new_group_path %>
+    </div>
+    
+     <!-- jQuery -->
+    <script src="assets/javascripts/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    <script src="assets/javascripts/bootstrap.min.js"></script>
+    
+
+    <!--  Checkbox, Radio & Switch Plugins -->
+	<script src="assets/javascripts/bootstrap-checkbox-radio-switch.js"></script>
+</body>
+</html>

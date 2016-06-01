@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160523011351) do
     t.integer  "group_id"
     t.boolean  "complete",    default: false
     t.integer  "score",       default: 0
-    t.integer  "repeat_days", default: -1
+    t.integer  "repeat_days", default: 0
   end
 
   create_table "group_invites", force: :cascade do |t|
