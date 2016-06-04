@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 
     get '/main' => 'hub#index', :as => 'main'
 
-      get '/chores' => 'chores#index'
+    get '/chores' => 'chores#index'
     get '/rewards/:id/purchase' => 'rewards#purchase', :as => 'purchase_reward'
 
 

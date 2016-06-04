@@ -59,10 +59,10 @@ class RewardsController < ApplicationController
   # DELETE /rewards/1
   # DELETE /rewards/1.json
   def destroy
+    @group = Group.find(@reward.group_id)
     @reward.destroy
     respond_to do |format|
-      @group = Group.find(@reward.group_id)
-      format.html { redirect_to @group, notice: 'Reward was successfully destroyed.' }
+      format.html { redirect_to group_rewards_path(@group.id), notice: 'Reward was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
