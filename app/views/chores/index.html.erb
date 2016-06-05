@@ -56,6 +56,8 @@
           <h2>Chores To Do</h2>
           <% if Group.active_user_groups(current_user.id).first != nil%>
      <%= link_to 'New Chore', new_chore_path, :class => "btn btn-primary btn-lg margin-button" %>
+          <% else %>
+          <p> Please join or create a group to add chores.</p>
           <% end %>
 						<table class="table table-striped table-hover">
 						  <thead>
