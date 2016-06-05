@@ -74,13 +74,13 @@ ActiveRecord::Schema.define(version: 20160601045255) do
   end
 
   create_table "memberships", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "user_id"
     t.integer  "group_id"
     t.boolean  "admin"
     t.boolean  "active"
-    t.integer  "chore_score"
+    t.integer  "chore_score", default: 0
   end
 
   create_table "newsfeeds", force: :cascade do |t|
@@ -95,15 +95,6 @@ ActiveRecord::Schema.define(version: 20160601045255) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-  end
-
-  create_table "rewardpunishments", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.boolean  "rorp"
-    t.integer  "value"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
   create_table "rewards", force: :cascade do |t|

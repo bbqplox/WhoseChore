@@ -4,12 +4,20 @@ class Chore < ActiveRecord::Base
   has_many :chore_rotations
   validates :name, :date, :score, :presence => true
 
-  def self.remind(chore_id)
-    # TODO: add mail reminder for user
+  def self.remind()
+    @incomplete_chores = incomplete()
+    for incomplete_chore in @incomplete_chores.each
+      if Date.today == Date.parse(incomplete_chore.date) - 1
+        @user = User.find(incomplete_chore.user_id)
+        #@group = Group.find(incomplete_chore.group_id)
+        @chore = incomplete_chore
+        UserMailer.chore_reminder_email(@user, @chore).deliver_now
+      end
+    end
   end
 
   def self.incomplete()
-    where(["completed = false"])
+    where(["complete = false"])
   end
 
   def self.destroy_all_completed(user_id)

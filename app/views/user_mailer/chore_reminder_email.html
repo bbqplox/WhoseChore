@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hello, <%= @user.first_name %></p>
+    <p>
+      Your assigned chore, <%= @chore.name %>, is due tomorrow!
+    </p>
+    <p>
+      This chore is worth <%= @chore.score %> points, so don't forget to claim your points and compelete this chore soon!
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= @url %>.
+    </p>
+    <p>Thank you and have a great day!</p>
+  </body>
+</html>

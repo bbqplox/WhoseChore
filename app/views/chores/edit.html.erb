@@ -88,14 +88,19 @@
   </div>
 
   <div class="content-title">
-    <%= f.label "Complete" %>
+    <%= f.label "Repeat Days" %><br>
+    <%= f.number_field :repeat_days, min: 0 %>
+  </div>
+
+  <div class="content-title">
+    <%= f.label "Complete without rotation and score" %>
     <%= f.check_box :complete %>
   </div>
 
   <div class="col-lg-12 margin-bottom">
       <%= f.submit :class => "btn btn-success button-size" %>
                         <% end %>
-  
+
                         <%= link_to 'Back to Groups', group_path(@chore.group_id),:class => "btn btn-warning margin-left button-size" %>
                         <%= link_to 'Back to Chores', chores_url,:class => "btn btn-warning button-size" %>
       </div>
