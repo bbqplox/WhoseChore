@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     post '/groups/:id/invite/' => 'group_invites#create', :as => 'invite_member'
     #post '/groups/:id/request/' => 'chore_requests#create', :as => 'chore_request'
 
-    get '/chores' => 'chores#index'
+    get '/chores' => 'chores#index', :as => 'chore_page'
     get 'chores/:id/completion' => 'chores#completion', :as => 'chore_complete'
     post 'chores/destroy_all_completed' => 'chores#destroy_all_completed', :as => 'destroy_all_completed'
 
