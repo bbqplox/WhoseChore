@@ -21,9 +21,8 @@ class UserMailer < ApplicationMailer
   end
 =end
 
-  def chore_reminder_email(user, group, chore)
+  def chore_reminder_email(user, chore)
     @user = user
-    @group = group
     @chore = chore
     @url = 'whosechore2.herokuapp.com'
     mail(to: @user.email, subject: 'Whosechore Reminder!')
