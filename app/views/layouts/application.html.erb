@@ -36,23 +36,25 @@
                     </h3>
                     </li>
                     <li>
-                       <a href="#"> <%= link_to "Main", main_path %> </a>
+
+                        <%= link_to "Main", main_path, :class => "navfont" %>
                     </li>
                     <li>
-                       <a href="#"> <%= link_to "Chores", chores_path %> </a>
+                        <%= link_to "Chores", chores_path, :class => "navfont" %>
                     </li>
                     <li>
-                       <a href="#"> <%= link_to "Groups", groups_path %> </a>
+                        <%= link_to "Groups", groups_path, :class => "navfont" %>
                     </li>
                     <li>
-                       <a href="#"> <%= link_to "Group Invites", group_invites_path %> </a>
+                        <%= link_to "Group Invites", group_invites_path, :class => "navfont" %>
                     </li>
 
                     <li>
-                       <a href="#"> <%= link_to "Profile", profile_path(current_user.profile.id) %> </a>
+                        <%= link_to "Profile", profile_path(current_user.profile.id), :class => "navfont" %>
                     </li>
                     <li>
-                       <a href="#"> <%= link_to "Log out", logout_path, method: "delete" %> </a>
+                        <%= link_to "Log out", logout_path, method: "delete", :class => "navfont" %>
+
                     </li>
             </ul>
         </div>

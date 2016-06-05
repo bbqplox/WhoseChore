@@ -39,7 +39,19 @@
   margin-right: -250px;
 }
 
+.black {
+  font-family: "Trebuchet", Helvetica, sans-serif;
+  text-align: center;
+  font-size: 1.6em; 
+}
+
 /* Sidebar Styles */
+.navfont {
+  font-family: "Trebuchet", Helvetica, sans-serif;
+  text-align: center;
+  font-size: 1.4em;
+  
+}
 
 .sidebar-nav {
   position: absolute;
@@ -49,12 +61,13 @@
   padding: 0;
   list-style: none;
   li {
+    font-family: "Trebuchet", Helvetica, sans-serif;
     text-indent: 20px;
     line-height: 40px;
     a {
       display: block;
       text-decoration: none;
-      color: #999999;
+      color: #999999; 
       &:hover {
         text-decoration: none;
         color: #000;
