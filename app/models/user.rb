@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
 
 	def self.search(search)
 		if search
-			where(["email LIKE ?", "%#{search}%"])
+			where(["email = ? OR first_name LIKE ? OR last_name LIKE ?",
+				"#{search}", "%#{search}%", "%#{search}%"])
 		else
 			return []
 		end

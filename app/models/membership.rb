@@ -35,6 +35,7 @@ class Membership < ActiveRecord::Base
     @memberships = where(["group_id = ? ", "#{group_id}"])
     @memberships.each do |membership|
       membership.destroy
+    end
   end
-end
+
 end

@@ -32,4 +32,11 @@ class Chore < ActiveRecord::Base
 		where(["group_id = ?", "#{group_id}"])
 	end
 
+  def self.destroy_group_chores(group_id)
+    @chores = search_by_group_id(group_id)
+    for chore in @chores.each
+      chore.destroy
+    end
+  end
+
 end

@@ -36,11 +36,11 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                
+
                 <div class="jumbotron">
                     <h1 class="black">Listing Invites</h1>
                 </div>
-                
+
                 <div class="row choreContent">
                     <div class="col-lg-12">
                     <p id="notice"><%= notice %></p>
@@ -59,8 +59,9 @@
                         <tbody>
                           <% @current_user.group_invites.each do |invite| %>
                             <% @sender = User.find(invite.sender_id) %>
+                            <% @group = Group.find(invite.group_id) %>
                             <tr>
-                              <td class="txt2"><%= @sender.first_name + " " + @sender.last_name %></td>
+                              <td class="txt2"><%= @sender.first_name + " " + @sender.last_name + " is inviting you to join " + @group.name %></td>
                               <td><%= link_to 'Accept', add_group_member_path(invite.group_id, user_id: invite.user_id, invite_id: invite.id), :class => "btn btn-success btn-lg", method: :put %></td>
                               <td><%= link_to 'Decline', invite, :class => "btn btn-danger btn-lg", method: :delete %></td>
                             </tr>

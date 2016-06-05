@@ -126,8 +126,11 @@ class GroupsController < ApplicationController
 	end
 
   def destroy
-    @group.destroy
     Membership.disband_group(@group.id)
+    Chore.destroy_group_chores(@group.id)
+    GroupInvite.destroy_all_from_group(@group.id)
+    @group.destroy
+
     redirect_to groups_url, notice: 'Group was successfully destroyed.'
   end
 
