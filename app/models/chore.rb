@@ -8,9 +8,9 @@ class Chore < ActiveRecord::Base
     for incomplete_chore in @incomplete_chores.each
       if Date.today == Date.parse(incomplete_chore.date) - 1
         @user = User.find(incomplete_chore.user_id)
-        @group = Group.find(incomplete_chore.group_id)
+        #@group = Group.find(incomplete_chore.group_id)
         @chore = incomplete_chore
-        UserMailer.chore_reminder_email(@user, @group, @chore).deliver_now
+        UserMailer.chore_reminder_email(@user, @chore).deliver_now
       end
     end
   end
