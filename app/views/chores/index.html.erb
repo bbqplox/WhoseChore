@@ -45,7 +45,7 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="jumbotron">
-                    <h1 class = "black"> Listing Chores </h1>
+                    <h1> Listing Chores </h1>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -83,13 +83,13 @@
 						        <td><%= @name %></td>
 
 
-                                  <td><%= link_to 'Show', chore_url(chore.id,from: chores_url), :class => "btn btn-info button-size" %></td>
+                                  <td><%= link_to 'Show', chore_url(chore.id,from: chores_url), :class => "btn btn-info btn-lg" %></td>
 
 
-                                  <td><%= link_to 'Edit', edit_chore_path(chore), :class => "btn btn-info button-size" %></td>
+                                  <td><%= link_to 'Edit', edit_chore_path(chore), :class => "btn btn-info btn-lg" %></td>
 
 
-                                  <td><%= link_to 'Complete', chore_complete_path(chore, from: chores_url), :class => "btn btn-success button-size" %></td>
+                                  <td><%= link_to 'Complete', chore_complete_path(chore, from: chores_url), :class => "btn btn-success btn-lg" %></td>
 						      </tr>
 						    <% end %>
 						  </tbody>
@@ -125,13 +125,13 @@
 						      <% @name = 'None' %>
 						    <% end %>
 						  <tr>
-						    <td class="txt2"><%= chore.name %></td>
-						    <td class="txt2"><%= chore.date %></td>
-                            <td class="txt2"><%= chore.score %></td>
-						    <td class="txt2"><%= @name %></td>
-                            <td><%= link_to 'Show', chore_url(chore.id,from: chores_url), :class => "btn btn-info button-size" %></td>
-                            <td><%= link_to 'Edit', edit_chore_path(chore), :class => "btn btn-info button-size" %></td>
-                            <td><%= link_to 'Destroy', chore_url(chore.id, from: chores_url), :class => "btn btn-danger button-size", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+						    <td><%= chore.name %></td>
+						    <td><%= chore.date %></td>
+                            <td><%= chore.score %></td>
+						    <td><%= @name %></td>
+                            <td><%= link_to 'Show', chore_url(chore.id,from: chores_url), :class => "btn btn-info btn-lg" %></td>
+                            <td><%= link_to 'Edit', edit_chore_path(chore), :class => "btn btn-info btn-lg" %></td>
+                            <td><%= link_to 'Destroy', chore_url(chore.id, from: chores_url), :class => "btn btn-danger btn-lg", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 						  </tr>
 						<% end %>
 						</tbody>
