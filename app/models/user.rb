@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 	has_many :chore_rotations
 	has_many :chore_invites
 	has_many :group_invites
-
+  validates :first_name, :last_name, :email, :presence => true
 	def self.search_index(search)
   	if search
 			where(["email LIKE ?", "%#{search}%"])
