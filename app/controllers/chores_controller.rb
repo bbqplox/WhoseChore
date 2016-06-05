@@ -24,7 +24,6 @@ class ChoresController < ApplicationController
     @chore = Chore.new(chore_params)
 
     @chore.save
-    Chore.remind(@chore.id)
 
     # TODO: Create chore rotation assignments if rotation if there is a repeat
     if Integer(params[:chore][:repeat_days]) > 0
