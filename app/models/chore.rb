@@ -2,7 +2,7 @@ class Chore < ActiveRecord::Base
   #belongs_to :user
   belongs_to :group
   has_many :chore_rotations
-  validates :name, :description, :date, :score, :presence => true
+  validates :name, :date, :score, :presence => true
 
   def self.remind(chore_id)
     # TODO: add mail reminder for user
