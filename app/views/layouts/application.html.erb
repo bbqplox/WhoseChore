@@ -17,23 +17,23 @@
                     </h3>
                     </li>
                     <li>
-                        <%= link_to "Main", main_path %>
+                        <%= link_to "Main", main_path, :class => "navfont" %>
                     </li>
                     <li>
-                        <%= link_to "Chores", chores_path %>
+                        <%= link_to "Chores", chores_path, :class => "navfont" %>
                     </li>
                     <li>
-                        <%= link_to "Groups", groups_path %>
+                        <%= link_to "Groups", groups_path, :class => "navfont" %>
                     </li>
                     <li>
-                        <%= link_to "Group Invites", group_invites_path %>
+                        <%= link_to "Group Invites", group_invites_path, :class => "navfont" %>
                     </li>
 
                     <li>
-                        <%= link_to "Profile", profile_path(current_user.profile.id) %>
+                        <%= link_to "Profile", profile_path(current_user.profile.id), :class => "navfont" %>
                     </li>
                     <li>
-                        <%= link_to "Log out", logout_path, method: "delete" %>
+                        <%= link_to "Log out", logout_path, method: "delete", :class => "navfont" %>
                     </li>
             </ul>
         </div>
