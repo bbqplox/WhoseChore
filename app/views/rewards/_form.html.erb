@@ -11,35 +11,35 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="content-title">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
+  <div class="content-title">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
-  <div class="field">
+  <div class="content-title">
     <%= f.label :cost %><br>
     <%= f.number_field :cost, min:1, :class => "black" %>
   </div>
 
   <!-- Group selection prompt will only appear if chore was not created through a group -->
-  <div class="field black">
+  <div class="content-title">
   <% if @group %>
     <!-- Pass which group a reward belongs to if the user creates it from within a group. -->
     <%= f.hidden_field :group_id, value: @group.id %>
   <% else %>
-    <%= f.label "Group", :class => "black" %><br>
+      <%= f.label "Group", :class => "txt2" %><br>
     <%= f.select :group_id, options_from_collection_for_select(Group.active_user_groups(current_user.id), 'id', 'name', f.object.group_id)%>
   <% end %>
   </div>  <!-- Group selection prompt will only appear if chore was not created through a group -->
 
-  <div class="field black">
+  <div class="content-title">
       <%= f.hidden_field :claimed_time, value: Date.today %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-success btn-xlg margin-left margin-top" %>
   </div>
 <% end %>

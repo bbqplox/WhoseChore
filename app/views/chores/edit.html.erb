@@ -32,12 +32,14 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
+                <div class="jumbotron">
+<h1 class="black">Editing Chore</h1>
+    </div>
                 <div class="row choreContent">
                     <div class="col-lg-12">
 
 <p id="notice"><%= notice %></p>
 
-<h1 class="black">Editing Chore</h1>
 <%= form_for(@chore) do |f| %>
   <% if @chore.errors.any? %>
     <div id="error_explanation">
@@ -51,22 +53,22 @@
     </div>
     <% end %>
 
-  <div class="field-name">
+  <div class="content-title">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
 
-  <div class="field-desc">
+  <div class="content-title">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
 
-  <div class="field-score">
+  <div class="content-title">
     <%= f.label :score %><br>
     <%= f.select :score, 1.. 10 %>
   </div>
 
-  <div class="field-date">
+  <div class="content-title">
     <%= f.label :date %><br>
     <%= f.select :date, Date.today.. 2.week.from_now %>
   </div>
@@ -77,7 +79,7 @@
     <% @admin = false %>
   <% end %>
 
-  <div class="field">
+  <div class="content-title">
     <% if @admin == true %>
       <%= f.label "Person Responsible" %> <br>
       <%#@group = Group.find(@chore.group_id)%>
@@ -85,17 +87,18 @@
     <% end %>
   </div>
 
-  <div class="field-complete">
+  <div class="content-title">
     <%= f.label "Complete" %>
     <%= f.check_box :complete %>
   </div>
 
-  <div class="actions">
-    <%= f.submit :class => "btn btn-2 btn-2d" %>
-  </div>
-  <% end %>
-                        <%= link_to 'Back to Groups', group_path(@chore.group_id),:class => "btn btn-4 btn-4d icon-arrow-left color-4" %>
-                        <%= link_to 'Back to Chores', chores_url,:class => "btn btn-4 btn-4d icon-arrow-left color-4" %>
+  <div class="col-lg-12 margin-bottom">
+      <%= f.submit :class => "btn btn-success button-size" %>
+                        <% end %>
+  
+                        <%= link_to 'Back to Groups', group_path(@chore.group_id),:class => "btn btn-warning margin-left button-size" %>
+                        <%= link_to 'Back to Chores', chores_url,:class => "btn btn-warning button-size" %>
+      </div>
 
                     </div>
                 </div>

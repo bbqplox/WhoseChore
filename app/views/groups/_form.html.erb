@@ -11,13 +11,15 @@
     </div>
   <% end %>
 
-<div class = "choreContent">
+<div class = "choreContent content-title padding">
   <div class="field-name">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="actions">
-    <%= f.submit :class => "btn btn-2 btn-2d"%>
+      <%= f.submit :class => "btn btn-success btn-lg margin-bottom margin-top"%>
+      
+      <%= link_to 'Back', groups_path,:class => "btn btn-warning btn-lg margin-bottom margin-top" %>
   </div>
 <% end %>
 </div>

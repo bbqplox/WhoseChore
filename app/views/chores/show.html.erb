@@ -32,6 +32,10 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
+                <div class="jumbotron">
+                    <h1>Chore Details</h1>
+                </div>
+                
                 <div class="row choreContent">
                     <div class="col-lg-12">
                       <p id="notice"><%= notice %></p>
@@ -89,7 +93,7 @@
                           <td><%=@name %></td>
                         </p>
 
-                        <%= link_to 'Back', params[:from], :class => "btn btn-4 btn-4d icon-arrow-left color-4" %>
+                        <%= link_to 'Back', params[:from], :class => "btn btn-warning btn-lg margin-bottom" %>
 
 
                     </div>

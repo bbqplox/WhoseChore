@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+html, body, div, span, h1, h3, h4, h5, h6, p, blockquote, pre, a, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
   background: transparent;
   border: 0;
   margin: 0;
@@ -17,15 +17,21 @@ body {
     background-repeat: no-repeat;
 }
 
+.content-title {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 1.5em;
+}
+
+
+.txt3 {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 1.8em;
+}
+
 body .login {
   background-image: url(bg.png);
 }
 
-h2 {
-  font-size: 30px;
-  line-height: 38px;
-  font-weight: normal;
-}
 
 .loginnav {
 	display: inline;

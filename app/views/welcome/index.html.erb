@@ -7,19 +7,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Whose Chore</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
+      
 </head>
 <body class="login">
 <!-- header starts here -->
 <div id="facebook-Bar">
   <div id="facebook-Frame">
-    <div id="logo"> <a href="#">Whose Chore</a> </div>
+      <div id="logo"><a href="#">Whose Chore</a></div>
     <div id="header-main-right">
       <div id="header-main-right-nav">
             <div class="loginnav">
             <%= form_for(:session, url: '/') do |f| %>
                 <%= f.email_field :email, :placeholder => "Email" %>
                 <%= f.password_field :password, :placeholder => "Password" %>
-                <%= f.submit "Log in", class: "btn-submit" %>
+                <%= f.submit "Log in", class: "btn btn-primary margin-bottom" %>
             <% end %>
             </div>
       </div>
@@ -44,11 +45,16 @@
 </div>
 <!-- ABOUT WHOSE CHORE -->
 <div class="loginbox radius" style="float: left">
-  <h1 style="color:#141823; text-align:center;">Whose Chore</h1>
+  <h2>Whose Chore</h2>
   <div class="loginboxinner radius">
     <div class="loginheader">
       <h4 class="title">Where the chores get done and the points don't matter!</h4>
     </div>
+      
+      <div class="userfaq">
+          <%= render "users/faq" %>
+      </div>
+      
   </div>
 </div>
 <!-- END ABOUT -->

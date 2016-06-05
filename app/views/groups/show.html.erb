@@ -32,22 +32,29 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
+                
+                <div class="jumbotron">
+                    <h1> <%= @group.name %></h1>
+                </div>
+                
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-5">
                        <p id="notice"><%= notice %></p>
 
-                    <div class = "choreContent">
-                        <h1 class="black"> <%= @group.name %></h1>
+                    <div class = "choreContent padding">
+                        <h1>Search/Invite Users</h1>
                         <!-- form_tag add_group_member_path(:id => @group.id), method: :put do -->
                         <!-- SEARCH FOR USERS TO INVITE -->
                         <%= form_tag @group, :method => 'get' do %>
                           <p>
-                            <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
-                            <%= submit_tag "Search", :name => nil %>
+                              <%= text_field_tag :search, params[:search], :class => "content-title", placeholder: "Search Users" %>
+                            <%= submit_tag "Search", :class => "btn btn-primary btn-lg ", :name => nil %>
                           </p>
                         <% end %>
+                        
+                        
                         <!-- TABLE FOR USER SEARCH RESULTS -->
-                        <table>
+                        <table class="table table-striped table-hover">
                           <thead>
                             <tr>
                               <th>Name</th>
@@ -62,22 +69,27 @@
                               invite_member_path(invite: {
                                 user_id: user.id,
                                 group_id: @group.id,
-                                sender_id: current_user.id}), method: :post %></td>
+                                  sender_id: current_user.id}), :class => "btn btn-success btn-lg ", method: :post %></td>
                             </tr>
                             <% end %>
                           </tbody>
                         </table>
-                        <%= link_to 'Edit', edit_group_path(@group), :class => "btn btn-info btn-simple btn-xs " %> |
-                        <%= link_to 'Back', groups_path, :class => "btn btn-4 btn-4d icon-arrow-left color-4" %> |
+                        <%= link_to 'Edit', edit_group_path(@group), :class => "btn btn-info btn-lg " %>
+                        <%= link_to 'Back', groups_path, :class => "btn btn-warning  btn-lg" %>
                     </div><br><br>
-
-                    <div class = "choreContent">
-                        <table>
+                    </div>
+                
+                <div class="col-lg-7 margin-top">
+                    <div class = "choreContent padding">
+                        <h2>Group Members</h2>
+                        <table class="table table-striped table-hover">
                           <thead>
                             <tr>
-                              <th class="txt">Name</th>
-                              <th class="txt">Admin</th>
-                              <th colspan="3"></th>
+                              <th>Name</th>
+                              <th>Admin</th>
+                              <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -85,28 +97,37 @@
                               <% @membership = Membership.search(user.id, @group.id).first %>
                               <% next if @membership.active == false %>
                               <tr>
-                                <td class="txt2"><%= user.first_name + " " + user.last_name %></td>
-                                <td class="txt2"><%= @membership.admin %></td>
-                                <td><%= link_to 'View Profile', user_url(user.id), :class => "btn btn-info btn-simple btn-xs" %></td>
+                                <td class="txt3"><%= user.first_name + " " + user.last_name %></td>
+                                <td class="txt3"><%= @membership.admin %></td>
+                                <td><%= link_to 'View Profile', user_url(user.id), :class => "btn btn-info btn-lg" %></td>
                                 <% if Membership.search(current_user.id, params[:id]).first != nil %>
-                                <td><%= link_to 'Banish', remove_group_member_path(@group, :user_id => user.id, :group_id => @group.id), :class => "btn btn-danger btn-simple btn-xs", data: { confirm: 'Are you sure?' } %></td>
+                                <td><%= link_to 'Banish', remove_group_member_path(@group, :user_id => user.id, :group_id => @group.id), :class => "btn btn-danger btn-lg margin-left", data: { confirm: 'Are you sure?' } %></td>
                                 <% end %>
                               </tr>
                             <% end %>
                           </tbody>
                         </table> <br>
                     </div><br>
+                    </div>
+                </div>
 
-                    <div class = "choreContent">
-                        <h5>Whose Chores To Do</h5>
-                        <table>
+                <div class = "row">
+                    <div class="col-lg-6">
+                    <div class = "choreContent padding">
+                        <h2>Whose Chores To Do</h2>
+                        <% if Membership.search(current_user.id, @group.id).first != nil && Membership.search(current_user.id, @group.id).first.active == true %>
+                          <%= link_to 'Assign Chore', new_chore_path(group_id: @group.id), :class => "btn btn-success btn-lg" %>
+                        <% end %>
+                        <table class="table table-striped table-hover">
                           <thead>
                             <tr>
-                              <th class="txt">Name</th>
-                              <th class="txt">Date</th>
-                              <th class="txt">Person Responsible</th>
-                              <th class="txt">Up Next</th>
-                              <th colspan="3"></th>
+                              <th>Name</th>
+                              <th>Date</th>
+                              <th>Person Responsible</th>
+                              <th>Up Next</th>
+                              <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -118,39 +139,44 @@
                                 <% @user_name = 'None' %>
                               <% end %>
                               <tr>
-                                <td class="txt2"><%= chore.name %></td>
-                                <td class="txt2"><%= chore.date %></td>
-                                <td class="txt2"><%= @user_name %></td>
+                                <td class="txt3"><%= chore.name %></td>
+                                <td class="txt3"><%= chore.date %></td>
+                                <td class="txt3"><%= @user_name %></td>
+
                                 <% @member_order = ChoreRotation.member_order(chore.id) %>
                                 <% if @member_order.size > 1%>
-                                  <td class="txt2"><%=  @member_order[1].first_name %></td>
+                                  <td class="txt3"><%=  @member_order[1].first_name %></td>
                                 <% elsif @member_order.size == 1 %>
-                                  <td class="txt2"><%= @member_order[0].first_name %></td>
+                                  <td class="txt3"><%= @member_order[0].first_name %></td>
+                                <% else %>
+                                  <td class="txt3"></td>
                                 <% end %>
+                                  
                                 <% if Membership.search(current_user.id, params[:id]).first != nil && Membership.search(current_user.id, params[:id]).first.active == true%>
-                                <td><%= link_to 'Show', chore_url(chore.id, from: group_url(@group.id)), :class => "btn btn-info btn-simple btn-xs" %></td>
-                                <td><%= link_to 'Edit', edit_chore_path(chore, from: group_url(@group.id)), :class => "btn btn-info btn-simple btn-xs" %></td>
-                                <td><%= link_to 'Complete', chore_complete_path(chore, from: group_url(@group.id)), :class => "btn complete color-4" %> </td>
+                                <td><%= link_to 'Show', chore_url(chore.id, from: group_url(@group.id)), :class => "btn btn-info" %></td>
+                                <td><%= link_to 'Edit', edit_chore_path(chore, from: group_url(@group.id)), :class => "btn btn-info" %></td>
+                                <td><%= link_to 'Complete', chore_complete_path(chore, from: group_url(@group.id)), :class => "btn btn-success" %> </td>
                                 <% end %>
                               </tr>
                             <% end %>
                           </tbody>
                         </table>
                         </div><br>
+                    </div>
+                
 
-                        <% if Membership.search(current_user.id, @group.id).first != nil && Membership.search(current_user.id, @group.id).first.active == true %>
-                          <%= link_to 'Assign Chore', new_chore_path(group_id: @group.id), :class => "btn btn-2 btn-2d" %> <br> <br>
-                        <% end %>
-
-                    <div class = "choreContent">
-                        <h5>Completed</h5>
-                          <table>
+                    <div class="col-lg-6">
+                    <div class = "choreContent padding">
+                        <h2>Completed</h2>
+                          <table class="table table-striped table-hover">
                             <thead>
                               <tr>
-                                <th class="txt">Name</th>
-                                <th class="txt">Date</th>
-                                <th class="txt">Person Responsible</th>
-                                <th colspan="3"></th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Person Responsible</th>
+                                <th></th>
+                                  <th></th>
+                                  <th></th>
                               </tr>
                             </thead>
                           <tbody>
@@ -162,13 +188,13 @@
                               <% @name = 'None' %>
                             <% end %>
                             <tr>
-                              <td class="txt2"><%= chore.name %></td>
-                              <td class="txt2"><%= chore.date %></td>
-                              <td class="txt2"><%= @name %></td>
+                              <td class="txt3"><%= chore.name %></td>
+                              <td class="txt3"><%= chore.date %></td>
+                              <td class="txt3"><%= @name %></td>
                               <% if Membership.search(current_user.id, params[:id]).first != nil && Membership.search(current_user.id, params[:id]).first.active == true%>
-                              <td><%= link_to 'Show', chore_url(chore.id, from: group_url(@group.id)), :class => "btn btn-info btn-simple btn-xs" %></td>
-                              <td><%= link_to 'Edit', edit_chore_path(chore, from: group_url(@group.id)), :class => "btn btn-info btn-simple btn-xs" %></td>
-                              <td><%= link_to 'Destroy', chore_url(chore.id, from: group_url(@group.id)), :class => "btn btn-danger btn-simple btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                              <td><%= link_to 'Show', chore_url(chore.id, from: group_url(@group.id)), :class => "btn btn-info btn-lg" %></td>
+                              <td><%= link_to 'Edit', edit_chore_path(chore, from: group_url(@group.id)), :class => "btn btn-info btn-lg" %></td>
+                              <td><%= link_to 'Destroy', chore_url(chore.id, from: group_url(@group.id)), :class => "btn btn-danger btn-lg", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
                               <% end %>
                               </tr>
@@ -176,23 +202,22 @@
                             </tbody>
                           </table>
                         </div><br>
-
-                        <div class = "choreContent">
-
-                        </div><br>
+                    </div>
+                </div>
+                </div>
 
                         <% if Membership.search(current_user.id, @group.id).first != nil && Membership.search(current_user.id, @group.id).first.active == true%>
-                          <%= link_to 'Rewards', group_rewards_path(@group.id), :class => "btn btn-2 btn-2d" %> <br> <br>
+                          <%= link_to 'Rewards', group_rewards_path(@group.id), :class => "btn btn-success btn-xlg margin-left" %> <br> <br>
                         <% end %>
 
 
                     </div>
-                </div>
+    
             </div>
-        </div>
+  
         <!-- /#page-content-wrapper -->
 
-    </div>
+ 
     <!-- /#wrapper -->
 
     <!-- jQuery -->

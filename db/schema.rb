@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160601045255) do
     t.integer  "group_id"
     t.boolean  "complete",    default: false
     t.integer  "score",       default: 0
-    t.integer  "repeat_days", default: -1
+    t.integer  "repeat_days", default: 0
   end
 
   create_table "group_invites", force: :cascade do |t|
@@ -110,11 +110,11 @@ ActiveRecord::Schema.define(version: 20160601045255) do
     t.string   "name"
     t.string   "description"
     t.integer  "cost"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "user_id",      default: -1
     t.integer  "group_id"
-    t.date     "claimed_time"
+    t.date     "claimed_time", default: '2016-06-04'
   end
 
   create_table "users", force: :cascade do |t|

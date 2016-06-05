@@ -1,14 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
   <title>WhoseChore</title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="../../assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../assets/stylesheets/simple-sidebar.css" rel="stylesheet">
+    
+    
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+    
 <body>
 
-<div id="crouton">
+<!--<div id="crouton">-->
+    
+     
+    
+    <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -17,36 +36,54 @@
                     </h3>
                     </li>
                     <li>
-                        <%= link_to "Main", main_path %>
+                       <a href="#"> <%= link_to "Main", main_path %> </a>
                     </li>
                     <li>
-                        <%= link_to "Chores", chores_path %>
+                       <a href="#"> <%= link_to "Chores", chores_path %> </a>
                     </li>
                     <li>
-                        <%= link_to "Groups", groups_path %>
+                       <a href="#"> <%= link_to "Groups", groups_path %> </a>
                     </li>
                     <li>
-                        <%= link_to "Group Invites", group_invites_path %>
+                       <a href="#"> <%= link_to "Group Invites", group_invites_path %> </a>
                     </li>
 
                     <li>
-                        <%= link_to "Profile", profile_path(current_user.profile.id) %>
+                       <a href="#"> <%= link_to "Profile", profile_path(current_user.profile.id) %> </a>
                     </li>
                     <li>
-                        <%= link_to "Log out", logout_path, method: "delete" %>
+                       <a href="#"> <%= link_to "Log out", logout_path, method: "delete" %> </a>
                     </li>
             </ul>
         </div>
+        
         <div id="page-content-wrapper">
+            <span href="#menu-toggle" class="glyphicon glyphicon-th-list menu-button" aria-hidden="true" id="menu-toggle"></span>
             <div class="container-fluid">
                 <div class="row">
-                </div>
+                </div>        
             </div>
       </div>
 </div>
 
 
 <%= yield %>
+    
+        <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 
 </body>
 </html>

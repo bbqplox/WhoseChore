@@ -11,23 +11,23 @@
     </div>
     <% end %>
 
-<div class = "choreContent">
+<div class = "padding">
   <div class="field-name">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
 
-  <div class="field-desc">
+  <div class="content-title">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
 
-  <div class="field-score">
+  <div class="content-title">
     <%= f.label :score %><br>
     <%= f.select :score, 1.. 10, :class => "black" %>
   </div>
 
-  <div class="field-date">
+  <div class="content-title">
     <%= f.label :date %><br>
     <%= f.select :date, Date.today.. 2.week.from_now %>
   </div>
@@ -39,7 +39,7 @@
   <% end %>
 
   <% if @admin %>
-  <div class="field black">
+  <div class="content-title">
       <%= f.label "Person Responsible" %> <br>
       <%#@group = Group.find(@chore.group_id)%>
       <%= f.select :user_id, options_from_collection_for_select(@users, 'id', 'first_name', f.object.user_id)%>
@@ -50,7 +50,7 @@
   <% end %>
 
   <!-- Group selection prompt will only appear if chore was not created through a group -->
-  <div class="field black">
+  <div class="content-title">
   <% if @group %>
     <!-- Pass which group a chore belongs to if the user creates it from within a group. -->
     <%= f.hidden_field :group_id, value: @group.id %>
@@ -60,13 +60,13 @@
   <% end %>
   </div>
 
-  <div class="field black">
+  <div class="content-title">
     <%= f.label "Repeat Days" %><br>
     <%= f.number_field :repeat_days, min: 0 %>
   </div>
 </div>
 
   <div class="actions">
-    <%= f.submit :class => "btn btn-2 btn-2d" %>
+      <%= f.submit :class => "btn btn-success btn-xlg margin-left" %>
   </div>
 <% end %>

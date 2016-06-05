@@ -1,133 +1,135 @@
 <%= stylesheet_link_tag 'chores' %>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Profile</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Bootstrap Core CSS -->
+  <link href="assets/stylesheet/bootstrap.min.css" rel="stylesheet">
+  <!-- Animation library for notifications   -->
+  <link href="assets/stylesheets/animate.min.css" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
+  <!--     Fonts and icons     -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+  <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
-
 <body>
-
-    <div id="wrapper">
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                      <div class = "choreContent">
-                            <h1 class = "black"> Welcome to WhoseChore </h1>
-                               <h5>Your Chores To Do</h5>
-                     						<table>
-                     						  <thead>
-                     						    <tr>
-                     						      <th class="txt">Name</th>
-                     						      <th class="txt">Date</th>
-                     						      <th class="txt">Score</th>
-                                      <th class="txt">Group</th>
-                     						      <th class="txt" colspan="3"></th>
-                     						    </tr>
-                     						  </thead>
-
-                     						  <tbody>
-                                    <% @choreit = 0 %>
-                     						    <% current_user.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
-                     						      <% next if chore.complete == true %>
-                     						        <% if Group.exists?(chore.group_id) %>
-                     						          <% @name = Group.find(chore.group_id).name %>
-                     						        <% else %>
-                     						          <% @name = 'None' %>
-                     						        <% end %>
-                     						      <tr>
-                     						        <td class="txt2"><%= chore.name %></td>
-                     						        <td class="txt2"><%= chore.date %></td>
-                                        <td class="txt2"><%= chore.score %></td>
-                     						        <td class="txt2"><%= @name %></td>
-
-                                        <td><%= link_to 'Show', chore_url(chore.id,from: main_url), :class => "btn btn-info btn-simple btn-xs" %></td>
-                                        <% @choreit = @choreit + 1 %>
-                                        <% if @choreit == 5 %>
-                                          <% break %>
-                                        <% end %>
-                     						      </tr>
-                     						    <% end %>
-                     						  </tbody>
-                     						</table> <br>
-                          </div> <br>
-                          <div class = "choreContent">
-                      						<h5>Recently Completed Chores</h5>
-                      						<table>
-                      						  <thead>
-                      						    <tr>
-                      						      <th class="txt">Name</th>
-                      						      <th class="txt">Date</th>
-                      						      <th class="txt">Score</th>
-                                                    <th class="txt">Person Responsible</th>
-                      						      <th class="txt" colspan="3"></th>
-                      						    </tr>
-                      						  </thead>
-
-                      						  <tbody>
-                                      <% @choreit = 0 %>
-                      						<% Chore.all.sort {|a,b| a.date <=> b.date }.each do |chore| %>
-                      						  <% next if chore.complete == false %>
-                                    <% if User.exists?(chore.user_id) %>
-                                      <% @name = User.find(chore.user_id).first_name %>
-                                    <% else %>
-                                      <% @name = 'None' %>
-                                    <% end %>
-                      						  <tr>
-                      						    <td class="txt2"><%= chore.name %></td>
-                      						    <td class="txt2"><%= chore.date %></td>
-                                      <td class="txt2"><%= chore.score %></td>
-                      						    <td class="txt2"><%= @name %></td>
-                                      <td><%= link_to 'Show', chore_url(chore.id,from: main_url), :class => "btn btn-info btn-simple btn-xs" %></td>
-                                      <% @choreit = @choreit + 1 %>
-                                      <% if @choreit == 5 %>
-                                          <% break %>
-                                      <% end %>
-                      						  </tr>
-                      						<% end %>
-                      						</tbody>
-                      						</table>
-                      						<br></div>
-                    </div>
-                </div>
+  <div id="wrapper">
+    <div id="page-content-wrapper" class="no-padding">
+      <!-- main page jumbotron -->
+      <div class="container-fluid">
+        <div class="jumbotron wood-bg">
+          <div class="row top-margin bottom-margin">
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <h1>Welcome to Whosechores!</h1>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- /#page-content-wrapper -->
-
+        <!-- /jumbotron -->
+      <div class="row">
+        <!-- Chores to do -->
+          
+        <div class="col-lg-6">
+       <div class = "choreContent table-responsive padding">
+          <h2>Your Chores</h2>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Score</th>
+                <th>Group</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @choreit = 0 %>
+              <% current_user.chores.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+              <% next if chore.complete == true %>
+              <% if Group.exists?(chore.group_id) %>
+              <% @name = Group.find(chore.group_id).name %>
+              <% else %>
+              <% @name = 'None' %>
+              <% end %>
+              <tr>
+                <td><%= chore.name %></td>
+                <td><%= chore.date %></td>
+                <td><%= chore.score %></td>
+                <td><%= @name %></td>
+                <td><%= link_to 'Show', chore_url(chore.id,from: main_url), :class => "btn btn-info button-size"%></td>
+                <% @choreit = @choreit + 1 %>
+                <% if @choreit == 5 %>
+                <% break %>
+                <% end %>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+          </div>
+        <!--div for table1 -->
+        <!-- Chores recently completed -->
+     
+        <div class="col-lg-6">
+            <div class = "choreContent table-responsive padding">
+            
+          <h2>Whosechore Activity</h2>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Score</th>
+                <th>Person Responsible</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @choreit = 0 %>
+              <% Chore.all.sort {|a,b| a.date <=> b.date }.each do |chore| %>
+              <% next if chore.complete == false %>
+              <% if User.exists?(chore.user_id) %>
+              <% @name = User.find(chore.user_id).first_name %>
+              <% else %>
+              <% @name = 'None' %>
+              <% end %>
+              <tr>
+                <td><%= chore.name %></td>
+                <td><%= chore.date %></td>
+                <td><%= chore.score %></td>
+                <td><%= @name %></td>
+                <td><%= link_to 'Show', chore_url(chore.id,from: main_url), :class => "btn btn-info button-size" %></td>
+                <% @choreit = @choreit + 1 %>
+                <% if @choreit == 5 %>
+                <% break %>
+                <% end %>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <!--div for table2 -->
+      </div>
+      <!--div for table row -->
     </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
+    <!-- /container-fluie -->
+  </div>
+      </div>
+  <!-- /page-content-wrapper -->
+</div>
+<!-- /wrapper -->
 </body>
-
 </html>
